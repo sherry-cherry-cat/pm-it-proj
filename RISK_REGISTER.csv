@@ -1,6 +1,13 @@
-
-id,ryzyko,prawdopodobienstwo,wpływ,reakcja,właściciel,plan_awaryjny
-R1,Brak doświadczenia z CI,Średnie,Wysoki,Szkolenie+szablon CI,DevOps,Wyłączyć regułę i przejść małymi krokami
-R2,Opóźnienia w komunikacji,Wysokie,Średni,Standupy 10min/tydz,PM,Asynchroniczny raport w README
-R3,Nadmiar zakresu,Średnie,Wysoki,Timeboxing i MoSCoW,PM,Obciąć funkcje NICE-TO-HAVE
-R4,Flaky testy,Niskie,Średni,Seed losowości,Tester,Wyłączyć test i naprawić w 24h
+﻿id,ryzyko,prawdopodobienstwo,wplyw,ocena,reakcja,wlasciciel,plan_awaryjny,status
+R-01,Błąd kryptografii / ponowne użycie nonce,Średnie,Krytyczny,9,"Weryfikacja biblioteki AES-GCM/Argon2id, testy negatywne, kontrola nonce",Autorka,"Wstrzymanie wydania, poprawa kodu i regresja",Open
+R-02,Opóźnienie realizacji indywidualnej,Wysokie,Wysoki,9,"Timebox, trzy sprinty, MoSCoW, przegląd co tydzień",Autorka,"Odrzucić Windows Hello, autoblokadę i kosmetykę UI",Open
+R-03,Zmiana API Windows Hello / WinRT,Średnie,Średni,4,"Osobny adapter, eksperyment tylko po MVP, weryfikacja wsparcia",Autorka,Zrezygnować z dodatku i użyć master,Open
+R-04,Niezgodna wersja Visual Studio i .NET,Średnie,Wysoki,6,Sprawdzić VS 2026 i SDK 10 przed scaffoldem; pin wersji,Autorka,Przejść na VS 2026 albo ustalić projekt .NET 8,Open
+R-05,"Zmiany API NuGet: EF Core, Argon2id, WPF UI",Średnie,Wysoki,6,"Przetestować wersje na jednej maszynie, nie aktualizować bez potrzeby",Autorka,Cofnąć aktualizację / zablokować wersje / usunąć WPF UI,Open
+R-06,Konflikt historii Git po utworzeniu lokalnego VS solution,Wysokie,Średni,6,"Klon jako source of truth, kopiowanie plików bez .git, PR do własnego main",Autorka,"Backup, odtworzyć poprawny klon i przenieść tylko pliki .cs/.xaml/.csproj",Open
+R-07,"Wyciek danych przez git, logi, schowek",Średnie,Krytyczny,9,"Ignore plików, testy na syntetykach, kontrola git diff przed commitem",Autorka,Zrotować realne sekrety; usunąć z repo i w razie potrzeby historii,Open
+R-08,Eksport nieprzenośny przez DPAPI,Średnie,Wysoki,6,"Format z portable wrapped DEK i KDF, test na drugim profilu Windows",Autorka,"Usunąć zależność od DPAPI, poprawić format i powtórzyć test",Open
+R-09,Utrata lub nadpisanie sejfu przy imporcie,Średnie,Krytyczny,9,"Import do pliku tymczasowego, walidacja, potwierdzenie i kopia",Autorka,Nie zastępować istniejącego sejfu bez poprawnej weryfikacji,Open
+R-10,Dokumentacja nie odpowiada faktycznemu stanowi,Wysokie,Wysoki,9,Raporty z rzeczywistymi datami i SHA; status Todo do potwierdzenia,Autorka,"Przywrócić stan zgodny z GitHub, oznaczyć carry-over",Open
+R-11,CI zielone mimo braku testów kodu,Średnie,Wysoki,6,Rozdzielić docs CI od dotnet CI; wykrywanie testów,Autorka,Nie dopuszczać do wydania do uruchomienia prawdziwego build/test,Open
+R-12,Brak czasu na interfejs WPF,Średnie,Wysoki,6,"MVVM, proste widoki, gotowe kontrolki, kontrakty usług",Autorka,Zastąpić skomplikowane widoki minimalnym WPF bez WPF UI,Open

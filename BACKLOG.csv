@@ -1,10 +1,27 @@
-
-id,tytuł,opis,story_points,priorytet,status,akceptacja
-US1,Rejestr wydatku,Jako użytkownik chcę dodać wydatek aby go śledzić,3,MUST,Todo,Po dodaniu rekord widoczny w liście
-US2,Lista wydatków,Jako użytkownik chcę zobaczyć listę ostatnich wydatków,3,MUST,Todo,Lista pokazuje kategorię/kwotę/datę
-US3,Podsumowanie 30 dni,Jako użytkownik chcę zobaczyć sumę i liczbę wydatków za 30 dni,5,MUST,Todo,Suma i liczba zgodne z danymi
-US4,Eksport CSV,Jako użytkownik chcę eksportować wydatki do CSV,3,SHOULD,Todo,Pobiera plik CSV z nagłówkami
-US5,Walidacja danych,Jako użytkownik chcę walidację pól aby unikać błędów,2,SHOULD,Todo,Błędne dane blokują zapis
-US6,Obsługa kategorii,Jako użytkownik chcę przypisać kategorię do wydatku,2,COULD,Todo,Kategorie zapisują się i filtrują
-TECH1,Pipeline CI,Konfiguracja testów+lint w CI,2,MUST,Doing,CI przechodzi zielono
-TECH2,Analiza jakości,Integracja SonarQube,3,COULD,Todo,Raport metryk jakości
+﻿id,tytul,opis,story_points,priorytet,status,sprint,akceptacja
+DOC-01,Dokumentacja i kontrola projektu,"Projekt: dokumentacja, Issues/Projects, ryzyka i 3 sprinty",3,MUST,Todo,1,"Karta projektu, trzy plany sprintów, rejestr ryzyk i własna tablica pracy"
+TECH-01,Repozytorium i .gitignore,Włączenie plików dokumentacji i reguł ignorowania danych użytkownika,2,MUST,Todo,1,Czysty PR do własnego main; git status bez sekretów / plików bin i obj
+TECH-02,Szkielet WPF i architektura,Rozwiązanie App/Core/Infrastructure/Tests i build,5,MUST,Todo,1,"WPF uruchamia się lokalnie, zbudowane projekty i referencje"
+SEC-01,DEK i opakowanie przez KEK,Losowy DEK; Argon2id z master i parametrami KDF,5,MUST,Todo,1,"Round-trip wrapping DEK, brak plaintext DEK w nagłówku; AC-01"
+SEC-02,AES-GCM i integralność,"Szyfrowanie, weryfikacja taga i odrzucenie złego master",5,MUST,Todo,1,"AC-02, AC-03; przypadki negatywne i unikalny nonce"
+SEC-03,Format nagłówka sejfu,Wersjonowanie formatu i walidacja wejścia,3,MUST,Todo,1,"Nagłówek: wersja, salt, parametry, wrapped DEK + nonce/tag"
+TECH-03,CI dla .NET,Budowanie i testy Windows WPF w GitHub Actions,3,MUST,Todo,1,Workflow dotnet potwierdza build + rzeczywiste testy
+DATA-01,Repozytorium SQLite EF Core,Przechowywanie rekordów szyfrowanych payloadów,5,MUST,Todo,2,"AC-07; tylko jawne techniczne identyfikatory, nie nazwa/hasło/login"
+US-01,Dodanie wpisu,Jako użytkownik chcę dodać login i hasło do sejfu,3,MUST,Todo,2,AC-04: wpis jest widoczny po odblokowaniu
+US-02,Edycja wpisu,Jako użytkownik chcę poprawić zapisane konto,2,MUST,Todo,2,AC-05: edycja jest trwała po restarcie
+US-03,Usunięcie wpisu,Jako użytkownik chcę usunąć nieaktualne konto,2,MUST,Todo,2,AC-05: rekord usunięty bez modyfikowania innych
+US-04,Lista i szczegóły wpisów,Jako użytkownik chcę wybrać i zobaczyć konto,3,MUST,Todo,2,"AC-08: lista i szczegóły, hasło domyślnie zamaskowane"
+US-05,Trwałość danych,Po restarcie hasła pozostają w zaszyfrowanym sejfie,3,MUST,Todo,2,AC-06: 20 testowych wpisów po ponownym odblokowaniu
+UI-01,Ekran utworzenia i otwarcia sejfu,Prosty interfejs w WPF/XAML,3,MUST,Todo,2,Użytkownik może utworzyć lub odblokować sejf przez UI
+UI-02,Widok CRUD i walidacja,Pola formularza i obsługa błędnych danych,3,MUST,Todo,2,Walidacja i czytelne błędy; widoki nie mają dostępu do bazy bez serwisu
+GEN-01,Generator haseł,Bezpieczna generacja hasła o wybranej długości,2,SHOULD,Todo,2,AC-09: CSPRNG i testy parametrów
+PORT-01,Eksport zaszyfrowanego sejfu,SaveFileDialog: lokalizacja i nazwa pliku,5,MUST,Todo,3,"AC-10: przenośny plik bez plaintext, prawidłowy snapshot"
+PORT-02,Import sejfu,OpenFileDialog: import na drugie urządzenie,5,MUST,Todo,3,AC-11: przeniesienie i odblokowanie tym samym master
+PORT-03,Ochrona istniejących danych przy imporcie,"Sprawdzenie formatu, integralności i nadpisania",3,MUST,Todo,3,AC-12: import błędnego pliku nie uszkadza istniejącego sejfu
+TECH-04,Testy integracyjne i regresji,Testy end-to-end i negatywne na danych testowych,5,MUST,Todo,3,"AC-01–AC-12 udokumentowane i wykonane, dowód działań CI"
+TECH-05,Demo i raporty sprintów,Prezentacja MVP i faktyczny rejestr wykonania,3,MUST,Todo,3,"README, linki do PR/Actions, raporty 3 sprintów, test przenośności"
+QUALITY-01,Maskowanie i kopiowanie hasła,Zmniejszenie przypadkowego ujawnienia w UI,2,SHOULD,Todo,3,Domyślnie zamaskowane; kopiowanie wybranej wartości
+QUALITY-02,Autoblokada i schowek,"Blokada po bezczynności, ewentualne czyszczenie schowka",3,SHOULD,Todo,3,Po czasie wymaga ponownego master; czyść schowek tylko gdy zgodny z kopią
+OPT-01,Windows Hello,Dodatkowe potwierdzenie pokazania hasła,5,COULD,Todo,Poza MVP,Anulowanie blokuje ujawnienie; sesja nadal wymaga master
+OPT-02,Synchronizacja API chmury,Dwukierunkowa synchronizacja wielu urządzeń,8,WONT,Todo,Poza MVP,Nie implementować w zadanym terminie
+OPT-03,TOTP,Generator kodów OTP dla serwisów,5,WONT,Todo,Poza MVP,Nie implementować w zadanym terminie
