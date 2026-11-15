@@ -6,8 +6,5 @@
         xmlns:local="clr-namespace:Password_Vault"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="Hello Word" HorizontalAlignment="Left" Margin="262,104,0,0" VerticalAlignment="Top" Height="26" Width="217" Click="Button_Click"/>
-
-    </Grid>
+    <Button Content="Hello Word" HorizontalAlignment="Left" Margin="262,104,0,0" VerticalAlignment="Top" Height="26" Width="217" Click="Button_Click"/>
 </Window>

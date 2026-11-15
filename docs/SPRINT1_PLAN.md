@@ -1,24 +1,24 @@
-# Sprint 1 — plan bazowy (01.11–15.11.2026)
-
-**Dokument opracowano:** 2026-11-02. 
+# Sprint 1 (1–15 listopada 2026)
 
 ## Cel
-Uruchomić proces pracy i uzyskać minimalny, testowalny szkielet aplikacji WPF wraz z samodzielnym serwisem kryptografii, który generuje losowy DEK, opakowuje go kluczem pochodzącym z hasła master i odrzuca nieprawidłowe hasła lub uszkodzony ciphertext.
+Przygotować projekt i podstawy pod aplikację: działający WPF, oddzielona logika, pierwsze testy szyfrowania oraz automatyczne sprawdzanie kodu na GitHubie.
 
-## Wybrane pozycje backlogu
-DOC-01, TECH-01, TECH-02, SEC-01, SEC-02, SEC-03, TECH-03.
+## Zadania
+- [ ] DOC-01 — uporządkować dokumentację, backlog i ryzyka.
+- [ ] TECH-01 — sprawdzić repozytorium i `.gitignore`.
+- [ ] TECH-02 — dodać projekty Core, Infrastructure i Tests do WPF.
+- [ ] SEC-01 — wygenerować DEK i zaszyfrować go przy użyciu KEK z hasła master.
+- [ ] SEC-02 — dodać AES-GCM i test błędnego hasła / uszkodzonych danych.
+- [ ] SEC-03 — opisać i serializować format pliku sejfu v1.
+- [ ] TECH-03 — uruchomić CI na GitHubie.
 
-## Kolejność zadań
-1. Sprawdzić stan lokalnego forka (szczególnie `chore/bootstrap-dotnet`), skopiować folder, zaktualizować pliki dokumentacji i `.gitignore` na gałęzi `docs/*`.
-2. Założyć Issues, milestones i GitHub Project, skonfigurować PR oraz działające CI dokumentacji.
-3. Utworzyć `PasswordVault.sln` lub `.slnx` i projekty `PasswordVault.App` (WPF), `PasswordVault.Core` (modele/interfejsy), `PasswordVault.Infrastructure` (krypto/persystencja), `PasswordVault.Tests` (xUnit).
-4. Przetestować wersję Argon2id, zdefiniować format nagłówka sejfu i testy poprawnego/błędnego master oraz modyfikacji szyfrogramu.
-5. Włączyć prawdziwy workflow .NET build/test. Nie mieszać statusu docs CI z sukcesem testów kodu.
+## Kiedy uznam zadania za skończone?
+- Rozwiązanie otwiera się i buduje w Visual Studio 2026.
+- Testy xUnit są widoczne w Test Explorerze i przechodzą.
+- Pull Request pokazuje zielony wynik CI.
+- Dokumentacja opisuje PasswordVault i zgadza się z backlogiem.
+- W PR nie ma danych użytkownika ani plików `bin` i `obj`.
 
-## Definition of Done dla sprintu
-- Dokumentacja zgodna z kartą projektu i aktualizowanym backlogiem.
-- Minimalne rozwiązanie kompiluje się na Windows z `dotnet build` (jeśli implementacja zakończona), testy krypto przechodzą; jeśli nie, oznaczyć zadania jako Carry-over, nie jako Done.
-- CI .NET jest skonfigurowane i uruchomione na kodzie
+WPF ma na tym etapie tylko okno testowe. Operacje na wpisach i SQLite są zaplanowane na Sprint 2.
 
-## Ryzyka / plan awaryjny
-Najpierw kryptografia i budowanie rozwiązania, później kosmetyka UI. Jeśli czas się kończy, zredukuje dodatkowe style UI i Windows Hello, nie rezygnując z testów integralności. 
+**Uwaga:** to jest plan, a nie potwierdzenie wykonania. Stan prac zapisuję w `docs/SPRINT1_REVIEW.md` po sprawdzeniu testów i PR.

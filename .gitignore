@@ -64,3 +64,7 @@ Desktop.ini
 *.tmp
 *.temp
 *~
+
+# Testowe paczki i pliki wynikowe
+*.trx
+*.pvault.json

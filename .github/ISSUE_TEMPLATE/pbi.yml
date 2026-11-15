@@ -1,60 +1,27 @@
-name: "🧱 Product Backlog Item"
-description: "Create a new Product Backlog Item (user story or feature request)"
-title: "[PBI] <krótki opis funkcji>"
-labels: ["backlog", "pbi", "todo"]
-assignees: []
+name: Funkcja (backlog)
+description: Opis nowej funkcji w projekcie PasswordVault
+title: "[PBI] "
+labels: ["enhancement"]
 body:
-  - type: markdown
-    attributes:
-      value: "## 🎯 Cel / Opis"
   - type: textarea
     id: description
     attributes:
-      label: "Opis"
-      description: "Opisz funkcję z perspektywy użytkownika lub celu biznesowego."
-      placeholder: "Jako [typ użytkownika] chcę [funkcja], aby [wartość / korzyść]."
+      label: Co chcę zrobić?
+      description: Krótki opis funkcji.
+      placeholder: Jako użytkownik chcę dodać konto do sejfu.
     validations:
       required: true
-
-  - type: markdown
-    attributes:
-      value: "## ✅ Kryteria akceptacji"
   - type: textarea
-    id: acceptance_criteria
+    id: acceptance
     attributes:
-      label: "Acceptance Criteria"
-      description: "Wypisz konkretne warunki, które muszą być spełnione, aby uznać PBI za ukończony."
-      placeholder: |
-        - [ ] Użytkownik może dodać nowy wydatek.
-        - [ ] Dane zapisują się poprawnie w pamięci.
-        - [ ] System pokazuje podsumowanie ostatnich 30 dni.
+      label: Jak sprawdzę działanie?
+      placeholder: "- [ ] Po dodaniu konta widzę je na liście."
     validations:
       required: true
-
-  - type: markdown
-    attributes:
-      value: "## 🧪 Definition of Done"
-  - type: textarea
-    id: dod
-    attributes:
-      label: "Definition of Done"
-      description: "Standard jakościowy dla zespołu (testy, CI, code review itp.)"
-      placeholder: |
-        - Kod zatwierdzony po code review.
-        - Testy jednostkowe przechodzą.
-        - Pipeline CI zielony.
-        - Dokumentacja zaktualizowana.
-    validations:
-      required: false
-
   - type: dropdown
     id: priority
     attributes:
-      label: "Priorytet"
-      options:
-        - P1 - Krytyczne
-        - P2 - Wysokie
-        - P3 - Średnie
-        - P4 - Niskie
+      label: Priorytet
+      options: [MUST, SHOULD, COULD]
     validations:
       required: true

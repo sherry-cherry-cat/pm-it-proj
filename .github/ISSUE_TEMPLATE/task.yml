@@ -1,48 +1,22 @@
-name: 🧱 Task
-description: Zadanie techniczne powiązane z User Story
+name: Zadanie techniczne
+description: Zmiana w kodzie, testach lub konfiguracji
 title: "[Task] "
 labels: ["task"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        ## ⚙️ Task
-        Wypełnij szczegóły zadania technicznego.
-  - type: input
-    id: summary
-    attributes:
-      label: Tytuł zadania
-      placeholder: np. Stworzyć endpoint API do rejestracji użytkownika
   - type: textarea
     id: description
     attributes:
-      label: Opis
-      description: Co dokładnie trzeba zrobić i dlaczego.
-      placeholder: np. Implementacja endpointu POST /register, zapis w bazie danych.
+      label: Co trzeba zrobić?
+      placeholder: Dodać testy odrzucenia błędnego hasła master.
+    validations:
+      required: true
   - type: input
-    id: related_story
+    id: backlog
     attributes:
-      label: 🔗 Powiązana User Story
-      description: Podaj numer historii użytkownika, np. #12
+      label: Powiązanie z backlogiem
+      placeholder: SEC-02
   - type: textarea
-    id: done
+    id: acceptance
     attributes:
-      label: ✅ Definition of Done / Kryteria akceptacji
-      value: |
-        - [ ] Warunek 1  
-        - [ ] Warunek 2  
-        - [ ] Warunek 3
-  - type: input
-    id: assignee
-    attributes:
-      label: 👤 Osoba odpowiedzialna
-      placeholder: np. @jan-kowalski
-  - type: dropdown
-    id: estimation
-    attributes:
-      label: ⏱️ Szacowany czas
-      options:
-        - 2h
-        - 4h
-        - 1 dzień
-        - 2 dni
+      label: Warunki zakończenia
+      placeholder: "- [ ] Testy przechodzą lokalnie i na GitHubie."
