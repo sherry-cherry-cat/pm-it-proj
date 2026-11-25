@@ -1,20 +1,23 @@
 ﻿ID;Tytuł;Typ;User Story / opis;Sprint;Priorytet;Story points;Kryteria akceptacji;Kategoria;Status
-DOC-01;Karta projektu i ryzyka;TASK;Opis projektu, zakres i ryzyka;S1;Must;2;PROJECT_CHARTER i rejestr ryzyk są spójne;Dokumentacja;Do weryfikacji
-DOC-02;Backlog i User Stories;TASK;Wymagania i historyjki użytkownika;S1;Must;3;Każda funkcja MVP ma kryterium akceptacji;Dokumentacja;Do weryfikacji
-DEV-01;Szkielet aplikacji WPF;TASK;Projekt Visual Studio 2026 z podziałem na moduły;S1;Must;3;Solution zawiera cztery projekty;Kod;Do weryfikacji
-SEC-01;Utworzenie sejfu;US;Jako użytkowniczka chcę utworzyć sejf, aby zapisywać w nim hasła.;S1;Must;5;"AC-01; losowy DEK i nagłówek";Bezpieczeństwo;Do weryfikacji
-SEC-02;Odblokowanie sejfu;US;Jako użytkowniczka chcę odblokować sejf, aby odczytać zapisane konta.;S1;Must;5;"AC-02, AC-03; błędne hasło jest odrzucone";Bezpieczeństwo;Do weryfikacji
-CI-01;Workflow GitHub Actions;TASK;Automatyczny build, test i lint;S1;Must;3;Po push/PR trzy etapy przechodzą na zielono;Jakość;Do weryfikacji
-DATA-01;Baza SQLite;TASK;Trwały zapis szyfrogramów przez EF Core;S2;Must;5;"AC-07; baza powstaje lokalnie";Kod;Do weryfikacji
-US-01;Dodanie konta;US;Jako użytkowniczka chcę dodać login i hasło, aby nie zapamiętywać ich ręcznie.;S2;Must;3;"AC-04; po restarcie wpis nadal istnieje";Funkcja;Do weryfikacji
-US-02;Edycja konta;US;Jako użytkowniczka chcę poprawić wpis, aby zapisać nowe hasło.;S2;Must;2;"AC-05; zmiana jest trwała";Funkcja;Do weryfikacji
-US-03;Usunięcie konta;US;Jako użytkowniczka chcę usunąć stary wpis, aby nie zaśmiecać sejfu.;S2;Must;2;"AC-05; inne wpisy zostają";Funkcja;Do weryfikacji
-US-04;Lista i wyszukiwanie;US;Jako użytkowniczka chcę wyszukać konto po nazwie, aby szybko je znaleźć.;S2;Must;3;Wyszukiwanie filtruje listę;Funkcja;Do weryfikacji
-US-05;Generator haseł;US;Jako użytkowniczka chcę wygenerować hasło, aby nie wymyślać go sama.;S2;Should;2;"AC-09; CSPRNG";Funkcja;Do weryfikacji
-PORT-01;Eksport sejfu;US;Jako użytkowniczka chcę zapisać zaszyfrowaną kopię do pliku, aby przenieść sejf.;S3;Must;3;"AC-10; wybór ścieżki";Funkcja;Do weryfikacji
-PORT-02;Import sejfu;US;Jako użytkowniczka chcę wczytać plik na innym komputerze, aby odzyskać zapisane konta.;S3;Must;5;"AC-11, AC-12; brak utraty danych po błędzie";Funkcja;Do weryfikacji
-TEST-01;Testy jednostkowe;TASK;Scenariusze poprawne i błędne;S3;Must;3;xUnit w Test Explorer i CI;Jakość;Do weryfikacji
-TEST-02;Ręczna demonstracja;TASK;Przejście przez 20 danych testowych i import;S3;Must;3;AC-01–AC-12 z dowodami;Jakość;Do weryfikacji
-DOC-03;Przeglądy sprintów i raport PDF;TASK;Trzy sprinty, wnioski i zrzuty ekranu;S3;Must;3;Raport PDF i link do repozytorium;Dokumentacja;Do weryfikacji
-OPT-01;Windows Hello;US;Jako użytkowniczka chcę potwierdzać operacje przez Windows Hello.;Poza MVP;Could;5;Funkcja odłożona;Opcjonalne;Do weryfikacji
-OPT-02;Synchronizacja przez API chmury;US;Jako użytkowniczka chcę synchronizować sejf automatycznie.;Poza MVP;Wont;8;Funkcja poza zakresem;Opcjonalne;Do weryfikacji
+DOC-01;Karta projektu i ryzyka;TASK;Opis projektu, zakres i ryzyka;S1;Must;2;PROJECT_CHARTER i rejestr ryzyk są spójne;Dokumentacja;Przygotowane – do przejrzenia
+DOC-02;Backlog i User Stories;TASK;Wymagania i historyjki użytkownika;S1;Must;3;Każda funkcja MVP ma kryterium akceptacji;Dokumentacja;Przygotowane – do przejrzenia
+DEV-01;Szkielet aplikacji WPF;TASK;Projekt Visual Studio 2026 z podziałem na moduły;S1;Must;3;Solution zawiera cztery projekty;Kod;Zrobione – projekt się buduje
+SEC-01;Utworzenie sejfu;US;Jako użytkowniczka chcę utworzyć sejf, aby zapisywać w nim hasła.;S1;Must;5;"AC-01; losowy DEK i nagłówek";Bezpieczeństwo;Kod przygotowany – do przetestowania
+SEC-02;Odblokowanie sejfu;US;Jako użytkowniczka chcę odblokować sejf, aby odczytać zapisane konta.;S1;Must;5;"AC-02, AC-03; błędne hasło jest odrzucone";Bezpieczeństwo;Kod przygotowany – do przetestowania
+CI-01;Workflow GitHub Actions;TASK;Automatyczny build, test i lint;S1;Must;3;Po push/PR trzy etapy przechodzą na zielono;Jakość;Plik gotowy – czekam na wynik Actions
+DATA-01;Baza SQLite;TASK;Trwały zapis szyfrogramów przez EF Core;S2;Must;5;"AC-07; baza powstaje lokalnie";Kod;Kod przygotowany – do przetestowania
+US-01;Dodanie konta;US;Jako użytkowniczka chcę dodać login i hasło, aby nie zapamiętywać ich ręcznie.;S2;Must;3;"AC-04; po restarcie wpis nadal istnieje";Funkcja;Kod przygotowany – do przetestowania
+US-02;Edycja konta;US;Jako użytkowniczka chcę poprawić wpis, aby zapisać nowe hasło.;S2;Must;2;"AC-05; zmiana jest trwała";Funkcja;Kod przygotowany – do przetestowania
+US-03;Usunięcie konta;US;Jako użytkowniczka chcę usunąć stary wpis, aby nie zaśmiecać sejfu.;S2;Must;2;"AC-05; inne wpisy zostają";Funkcja;Kod przygotowany – do przetestowania
+US-04;Lista i wyszukiwanie;US;Jako użytkowniczka chcę wyszukać konto po nazwie, aby szybko je znaleźć.;S2;Must;3;Wyszukiwanie filtruje listę;Funkcja;Poprawka przygotowana – do sprawdzenia
+US-05;Generator haseł;US;Jako użytkowniczka chcę wygenerować hasło, aby nie wymyślać go sama.;S2;Should;2;"AC-09; CSPRNG";Funkcja;Kod przygotowany – do przetestowania
+PORT-01;Eksport sejfu;US;Jako użytkowniczka chcę zapisać zaszyfrowaną kopię do pliku, aby przenieść sejf.;S3;Must;3;"AC-10; wybór ścieżki";Funkcja;Kod przygotowany – do przetestowania
+PORT-02;Import sejfu;US;Jako użytkowniczka chcę wczytać plik na innym komputerze, aby odzyskać zapisane konta.;S3;Must;5;"AC-11, AC-12; brak utraty danych po błędzie";Funkcja;Kod przygotowany – do przetestowania
+TEST-01;Testy jednostkowe;TASK;Scenariusze poprawne i błędne;S3;Must;3;xUnit w Test Explorer i CI;Jakość;Testy napisane – wynik do sprawdzenia
+TEST-02;Ręczna demonstracja;TASK;Przejście przez 20 danych testowych i import;S3;Must;3;AC-01–AC-12 z dowodami;Jakość;Do zrobienia
+DOC-03;Przeglądy sprintów i raport PDF;TASK;Trzy sprinty, wnioski i zrzuty ekranu;S3;Must;3;Raport PDF i link do repozytorium;Dokumentacja;Szkic raportu – do uzupełnienia
+OPT-01;Windows Hello;US;Jako użytkowniczka chcę potwierdzać operacje przez Windows Hello.;Poza MVP;Could;5;Funkcja odłożona;Opcjonalne;Poza zakresem
+OPT-02;Synchronizacja przez API chmury;US;Jako użytkowniczka chcę synchronizować sejf automatycznie.;Poza MVP;Wont;8;Funkcja poza zakresem;Opcjonalne;Poza zakresem
+US-06;Reset menedżera;US;Jako użytkowniczka chcę skasować lokalny sejf po potwierdzeniu, żeby zacząć od nowa.;S2;Should;2;Pytanie przed skasowaniem, anulowanie bez zmian, usunięcie tylko lokalnych danych.;Funkcja;Poprawka przygotowana – do sprawdzenia
+PM-01;Kanban w GitHub Projects;TASK;Przeniesienie zadań z backlogu na tablicę Todo / In Progress / Done.;S3;Could;2;Tablica połączona z Issues, statusy odpowiadają rzeczywistemu postępowi.;Zarządzanie;Do zrobienia
+QUAL-01;SonarQube Cloud;TASK;Analiza jakości kodu C# powiązana z repozytorium i GitHub Actions.;S3;Could;2;Widać wynik analizy projektu i screenshot w raporcie.;Jakość;Do skonfigurowania

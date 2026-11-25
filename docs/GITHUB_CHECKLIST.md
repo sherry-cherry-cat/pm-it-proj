@@ -1,31 +1,26 @@
-# GitHub — lista do wykonania w przeglądarce
-
-Sam folder nie wykona operacji na koncie GitHub. Trzeba je zrobić ręcznie.
+# GitHub – rzeczy do sprawdzenia przed oddaniem
 
 ## Repozytorium
+- [ ] Repozytorium jest prywatne, a prowadzący `pan-rafal` ma dostęp jako współpracownik.
+- [ ] Temat został zgłoszony / zaakceptowany.
+- [ ] Mam kod w `main`, a większe zmiany wprowadzałam przez osobne gałęzie i PR.
+- [ ] Usunęłam z bieżącego projektu stare pliki z przykładu w Pythonie.
 
-- [ ] Repozytorium jest prywatne (zgodnie z prezentacją prowadzącego).
-- [ ] Prowadzący `pan-rafal` jest dodany w `Settings → Collaborators`.
-- [ ] Temat projektu jest zgłoszony w arkuszu / zaakceptowany.
-- [ ] `main` jest gałęzią końcową. Pracuję w `feature/...` i otwieram PR do **własnego** repozytorium.
-- [ ] Stare pliki wzorcowej aplikacji Python zostały usunięte z aktualnego kodu.
+## Zadania i sprinty
+- [ ] Backlog odpowiada temu, co naprawdę robię w aplikacji.
+- [ ] Mam trzy plany sprintów i uczciwe podsumowania postępów.
+- [ ] Najważniejsze zadania mają User Stories i kryteria akceptacji.
+- [ ] Na ocenę 5: przeniosłam zadania do GitHub Projects (Kanban: Todo / In Progress / Done).
 
-## Issues / plan
+## Kontrole jakości
+- [ ] W Visual Studio widzę testy w `PasswordVault.Tests`.
+- [ ] Uruchomiłam testy i zapisałam wynik (po poprawce resetowania ma być 13 testów).
+- [ ] GitHub Actions: build, testy oraz lint przechodzą na zielono.
+- [ ] Na ocenę 5: podłączyłam SonarQube i mam prawdziwy wynik analizy.
 
-- [ ] W `Issues` mam zadania odpowiadające backlogowi (nie trzeba zakładać wszystkich opcjonalnych).
-- [ ] Są minimum 3 milestone'y: Sprint 1 (15.11), Sprint 2 (29.11), Sprint 3 (13.12).
-- [ ] Mam projekt typu Board w GitHub Projects z kolumnami `Todo`, `In Progress`, `Done` — szczególnie na ocenę 5.
-- [ ] Każde Issue ma sprint, priorytet i kryterium akceptacji.
+## Raport i demo
+- [ ] Raport PDF zawiera opis projektu, backlog, ryzyka, sprinty i wnioski.
+- [ ] Dodałam screeny z aplikacji, Visual Studio i GitHub Actions.
+- [ ] Mam link do repozytorium i krótkie demo na fikcyjnych danych.
 
-## CI i jakość
-
-- [ ] Pull Request do `main` uruchamia workflow `ci.yml`.
-- [ ] Build, testy i `dotnet format whitespace` kończą się na zielono.
-- [ ] W raporcie mam screeny z rzeczywistym wynikiem CI.
-- [ ] Jeśli chcę ocenę 5: konfiguruję SonarQube / SonarCloud (osobno, z tokenem w GitHub Secrets) i dodaję realny screenshot analizy. Nie jest to element wymuszony przez gotową paczkę.
-
-## Oddanie
-
-- [ ] Wysyłam link do repozytorium oraz raport PDF.
-- [ ] Raport pokazuje opis, zespół (praca indywidualna), backlog, ryzyka, sprinty, testy, screeny i wnioski.
-- [ ] Przygotowałam krótkie demo (2–5 minut).
+Nic z powyższych punktów nie jest automatycznie wykonane przez skopiowanie dokumentacji. Zaznaczam tylko te punkty, które rzeczywiście sprawdziłam.

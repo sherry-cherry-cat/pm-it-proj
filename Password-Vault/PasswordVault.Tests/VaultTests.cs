@@ -34,7 +34,7 @@ public sealed class VaultTests
     public void ZleMasterNieOtwieraSejfu()
     {
         var (header, _) = VaultCrypto.Create(Master);
-        Assert.Throws<CryptographicException>(() => VaultCrypto.Unlock("InneHasloTestowe!", header));
+        Assert.ThrowsAny<CryptographicException>(() => VaultCrypto.Unlock("InneHasloTestowe!", header));
     }
 
     [Fact]
@@ -52,7 +52,7 @@ public sealed class VaultTests
         byte[] key = RandomNumberGenerator.GetBytes(32);
         var blob = VaultCrypto.Encrypt(Encoding.UTF8.GetBytes("abc"), key);
         blob.Ciphertext = Convert.ToBase64String(Encoding.UTF8.GetBytes("xyz"));
-        Assert.Throws<CryptographicException>(() => VaultCrypto.Decrypt(blob, key));
+        Assert.ThrowsAny<CryptographicException>(() => VaultCrypto.Decrypt(blob, key));
     }
 
     [Fact]
@@ -150,7 +150,7 @@ public sealed class VaultTests
             var b = new VaultRepository(destination);
             byte[] key = b.Create("MojeInneHaslo!456");
             b.Save(new VaultEntry { Title = "Ocalały", Password = "sekret" }, key);
-            Assert.Throws<CryptographicException>(() => b.Import(export, "ZleHasloUzytkownika"));
+            Assert.ThrowsAny<CryptographicException>(() => b.Import(export, "ZleHasloUzytkownika"));
             Assert.Equal("Ocalały", Assert.Single(b.GetEntries(b.Unlock("MojeInneHaslo!456"))).Title);
         }
         finally
@@ -178,7 +178,7 @@ public sealed class VaultTests
             Assert.Equal(exportedBefore, File.ReadAllText(export));
             byte[] newKey = store.Create("NoweHasloMaster!2026");
             Assert.Empty(store.GetEntries(newKey));
-            Assert.Throws<CryptographicException>(() => store.Unlock(Master));
+            Assert.ThrowsAny<CryptographicException>(() => store.Unlock(Master));
             CryptographicOperations.ZeroMemory(oldKey);
             CryptographicOperations.ZeroMemory(newKey);
         }

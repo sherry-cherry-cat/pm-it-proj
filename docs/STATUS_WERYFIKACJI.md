@@ -1,9 +1,16 @@
-# Status sprawdzenia paczki — 25.11.2026
+# Co jest sprawdzone, a co jeszcze nie – stan na 25.11.2026
 
-- Przygotowałam projekt WPF/.NET 10, bibliotekę Core, warstwę SQLite i testy xUnit.
-- Sprawdziłam układ katalogów, pliki XML, YAML, CSV, odwołania projektów oraz spakowane pliki.
-- **Nie uruchamiałam kompilacji ani testów C# w tym środowisku** — nie ma tu zainstalowanego .NET SDK. Pierwszym krokiem w Visual Studio jest `Restore`, `Build` i `Run All Tests`.
-- Nie potwierdziłam też statusu GitHub Actions, tablicy Projects ani zaproszenia prowadzącego do repozytorium.
-- Raport PDF pozostaje szkicem do uzupełnienia o prawdziwe wyniki i screenshoty.
+## Zrobione
+- Mam projekt WPF na .NET 10 i udało mi się go zbudować w Visual Studio.
+- Przygotowana jest wersja programu z lokalnym sejfem, SQLite i podstawowymi funkcjami.
+- Mam projekt `PasswordVault.Tests` oraz konfigurację GitHub Actions.
 
-Dopiero po sprawdzeniu w Visual Studio i na GitHubie mogę zaznaczyć te elementy jako gotowe.
+## Do sprawdzenia
+- [ ] Wynik testów xUnit: [wpiszę wynik z Test Explorera].
+- [ ] Wynik GitHub Actions (build, testy, lint): [link].
+- [ ] Działanie poprawki wyszukiwania i resetowania po wgraniu.
+- [ ] Ręczny test importu, eksportu i ponownego otwarcia sejfu.
+- [ ] Wynik SonarQube (jeśli skonfiguruję).
+- [ ] Screeny do raportu PDF.
+
+Nie wpisuję zaliczonych testów ani zielonego CI na podstawie samego kodu. Po uruchomieniu aktualizuję tę listę.

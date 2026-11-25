@@ -1,14 +1,17 @@
-# Definition of Ready / Definition of Done
+# Kiedy zadanie jest gotowe do pracy, a kiedy skończone?
 
-## Definition of Ready
+## Definition of Ready – mogę zacząć zadanie, jeśli:
+- wiem, co mam zrobić i po co;
+- mam wpisany priorytet i sprint;
+- wiem, od jakich innych zadań zależy;
+- mam sposób, żeby sprawdzić, czy działa.
 
-Zadanie ma opis, priorytet, przydzielony sprint oraz sposób sprawdzenia wyniku. Wiem, od jakiej części kodu zależy.
+## Definition of Done – zaznaczam „Zrobione”, jeśli:
+- [ ] zmiana jest w kodzie i projekt się buduje;
+- [ ] przeszły testy, których dotyczy zmiana;
+- [ ] przy zmianie w UI sprawdziłam działanie ręcznie;
+- [ ] zrobiłam commit i wysłałam go na GitHuba;
+- [ ] sprawdziłam wynik GitHub Actions (build, testy, lint);
+- [ ] zadanie i dokumentacja mają aktualny status.
 
-## Definition of Done
-
-- Kod jest zapisany w repozytorium i powiązany z zadaniem.
-- Projekt kompiluje się bez błędów.
-- Testy dotyczące zmiany przechodzą.
-- Sprawdziłam funkcję ręcznie, jeśli dotyczy UI.
-- Otworzyłam PR, sprawdziłam zmiany i wynik GitHub Actions.
-- Zaktualizowałam status zadania, gdy zmiana trafiła do `main`.
+Jeśli coś jest napisane, ale jeszcze tego nie sprawdziłam, ustawiam **Do sprawdzenia**, a nie **Zrobione**.

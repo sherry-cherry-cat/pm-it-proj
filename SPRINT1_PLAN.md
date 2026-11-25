@@ -1,16 +1,28 @@
-# Sprint 1 — 1–15 listopada 2026
+# Sprint 1 – start projektu (1–15.11.2026)
 
-## Cel
-Przygotować repozytorium, strukturę aplikacji i podstawowe szyfrowanie sejfu.
+## Co chciałam zrobić
+Na początku chciałam mieć działający szkielet aplikacji i poukładane repozytorium. Zaplanowałam też pierwszą wersję szyfrowania i automatyczne testy.
 
-## Zadania z backlogu
-DOC-01, DOC-02, DEV-01, SEC-01, SEC-02, CI-01.
+| Zadanie | Priorytet | Od czego zależy |
+|---|---|---|
+| Karta projektu i lista ryzyk (DOC-01) | wysoki | – |
+| Backlog i User Stories (DOC-02) | wysoki | karta projektu |
+| Utworzenie projektu WPF w Visual Studio (DEV-01) | wysoki | – |
+| Tworzenie i odblokowanie sejfu (SEC-01, SEC-02) | wysoki | projekt C#, wybór bibliotek |
+| GitHub Actions (CI-01) | wysoki | kod i projekt testowy |
 
-## Zależności
-Najpierw szkielet rozwiązania i wybór bibliotek, później szyfrowanie i testy. CI można konfigurować równolegle.
+## Co zrobiłam
+- Utworzyłam projekt WPF w Visual Studio i umieściłam go na GitHubie.
+- Sprawdziłam, że uruchamia się okno z prostym przyciskiem.
+- Dodałam pierwszy plan sprintu i zaczęłam porządkować dokumentację.
 
-## Kryteria ukończenia
-Można utworzyć i odblokować sejf; błędne hasło jest odrzucane; testy kompilują się i uruchamiają lokalnie oraz w GitHub Actions.
+## Co zostało do dokończenia
+Nie zdążyłam w pierwotnym terminie potwierdzić działania kryptografii, testów xUnit i CI. Kod do tych części przygotowałam później, więc nie wpisuję ich jako zakończonych 15 listopada.
 
-## Uwaga o statusie
-Daty są datami przyjętego planu. Faktycznie wykonane zadania i opóźnienia wpisuję w `docs/SPRINT1_REVIEW.md`, nie oznaczam niczego jako ukończone bez sprawdzenia.
+## Jak sprawdzę zamknięcie zadań
+- Projekt da się otworzyć i zbudować w Visual Studio 2026.
+- Tworzenie i odblokowanie sejfu działa na testowym haśle.
+- Niepoprawne hasło jest odrzucane.
+- Testy xUnit i workflow GitHub Actions rzeczywiście się uruchamiają.
+
+**Wniosek:** początkowy zakres okazał się zbyt duży jak na jeden sprint. Zostawiłam dodatkowe funkcje poza MVP i przesunęłam brakujące kontrole na kolejny etap.

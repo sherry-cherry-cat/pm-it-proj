@@ -13,4 +13,6 @@
 - **AC-11:** Zaimportowany plik odblokowuje się tym samym hasłem master.
 - **AC-12:** Nieudany import nie nadpisuje istniejących danych.
 
+- **AC-13:** Reset wymaga potwierdzenia, anulowanie niczego nie usuwa, a potwierdzenie usuwa lokalny sejf bez usuwania eksportów.
+
 W raporcie końcowym zaznaczę tylko kryteria, które naprawdę sprawdziłam (automatycznie lub ręcznie).

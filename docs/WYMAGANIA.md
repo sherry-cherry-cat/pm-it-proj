@@ -10,6 +10,7 @@
 | F-04 | Mogę wyszukać konto po nazwie. | Lista filtruje wyniki. |
 | F-05 | Mogę wygenerować losowe hasło. | Hasło ma 20 znaków, kolejne próby są różne. |
 | F-06 | Mogę wyeksportować i zaimportować sejf. | Eksport w `.pvault`, import na drugiej instalacji. |
+| F-07 | Mogę wyczyścić lokalny sejf po potwierdzeniu. | Przy anulowaniu dane zostają, po potwierdzeniu można utworzyć nowy sejf. |
 
 ## Niefunkcjonalne
 

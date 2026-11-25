@@ -8,3 +8,4 @@ R06;Błędy GUI WPF;Średnie;Średni;Zostawiam prosty widok bez dodatkowych kont
 R07;Uszkodzony import;Średnie;Wysoki;Sprawdzam hasło i wszystkie wpisy przed zmianą bazy;Autorka;Otwarte
 R08;Za dużo funkcji w backlogu;Wysokie;Średni;Funkcje dodatkowe przenoszę poza MVP;Autorka;Otwarte
 R09;Brak dowodów do raportu;Średnie;Średni;Zapisuję screeny z VS/Actions oraz linki do PR;Autorka;Otwarte
+R10;Przypadkowy reset lokalnego sejfu;Średnie;Wysoki;Pytanie przed resetem i eksport kopii przed testami;Autorka;Otwarte

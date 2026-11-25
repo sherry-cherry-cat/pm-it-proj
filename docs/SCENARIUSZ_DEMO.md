@@ -9,7 +9,8 @@
 7. Eksportuję sejf do pliku `.pvault` w wybranym folderze.
 8. Importuję plik do **pustego środowiska testowego** albo robię kopię obecnej bazy przed nadpisaniem.
 9. Pokazuję, że wpis nadal można odczytać.
-10. Otwieram Test Explorer i wynik GitHub Actions.
+10. Jeśli mam już przetestowaną poprawkę resetowania, pokazuję okno potwierdzenia i wybieram „Nie”. Pełny reset robię tylko na danych testowych, po wykonaniu eksportu.
+11. Otwieram Test Explorer i wynik GitHub Actions.
 
 ## Co warto sfotografować
 
