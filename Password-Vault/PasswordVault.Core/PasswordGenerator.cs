@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 
 namespace PasswordVault.Core;
-
+//komentarz by zrobić commit
 public static class PasswordGenerator
 {
     private const string Alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%*_-";
