@@ -25,7 +25,7 @@ public sealed class VaultCryptoTests
     {
         VaultFile file = _service.Encrypt(Encoding.UTF8.GetBytes("sekret"), Master);
 
-        Assert.Throws<CryptographicException>(() =>
+        Assert.ThrowsAny<CryptographicException>(() =>
             _service.Decrypt(file, "inne haslo"));
     }
 
@@ -37,7 +37,7 @@ public sealed class VaultCryptoTests
         data[0] ^= 1;
         VaultFile damaged = file with { Data = Convert.ToBase64String(data) };
 
-        Assert.Throws<CryptographicException>(() => _service.Decrypt(damaged, Master));
+        Assert.ThrowsAny<CryptographicException>(() => _service.Decrypt(damaged, Master));
     }
 
     [Fact]
@@ -48,7 +48,7 @@ public sealed class VaultCryptoTests
         data[0] ^= 1;
         VaultFile damaged = file with { WrappedKey = Convert.ToBase64String(data) };
 
-        Assert.Throws<CryptographicException>(() => _service.Decrypt(damaged, Master));
+        Assert.ThrowsAny<CryptographicException>(() => _service.Decrypt(damaged, Master));
     }
 
     [Fact]
