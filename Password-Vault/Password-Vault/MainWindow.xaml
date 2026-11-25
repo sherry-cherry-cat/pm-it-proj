@@ -32,7 +32,7 @@
                     <Button x:Name="UnlockButton" Content="Odblokuj" Click="Unlock_Click" Background="#2166C2" Foreground="White" />
                     <Button Content="Importuj plik..." Click="Import_Click" />
                 </StackPanel>
-                <TextBlock Text="Nie ma możliwości odzyskania hasła master. Używaj wyłącznie danych testowych w tym projekcie."
+                <TextBlock Text="Nie ma możliwości odzyskania hasła master."
                            Foreground="#8A4C39" TextWrapping="Wrap" Margin="0,15,0,0" />
             </StackPanel>
         </Border>
@@ -47,7 +47,23 @@
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top">
                         <TextBlock Text="Zapisane konta" FontSize="20" FontWeight="SemiBold" />
-                        <TextBox x:Name="SearchInput" Margin="0,12,0,8" ToolTip="Wyszukaj po nazwie" TextChanged="Search_Changed" />
+                        <Grid Margin="0,12,0,8">
+                            <TextBox x:Name="SearchInput" Text="" Margin="0"
+                                     ToolTip="Wyszukaj po nazwie" TextChanged="Search_Changed" />
+                            <TextBlock Text="Wyszukaj" Foreground="#8390A1" Margin="10,0,0,0"
+                                       VerticalAlignment="Center" IsHitTestVisible="False">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=SearchInput}" Value="">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
                         <Button Content="+ Nowy wpis" Click="New_Click" Background="#2166C2" Foreground="White" />
                     </StackPanel>
                     <ListBox x:Name="EntriesList" Margin="0,12,0,0" FontSize="15"

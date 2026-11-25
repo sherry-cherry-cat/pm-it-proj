@@ -75,7 +75,14 @@ public partial class MainWindow : Window
 
     private void RefreshEntries()
     {
+        // Po zapisie, usunięciu lub odblokowaniu odczytuję dane z bazy tylko raz.
         _entries = _store.GetEntries(RequireKey());
+        FilterEntries();
+    }
+
+    private void FilterEntries()
+    {
+        // Wyszukiwanie korzysta z listy w pamięci, bez odczytu i deszyfrowania bazy.
         string search = SearchInput.Text.Trim();
         _refreshing = true;
         try
@@ -92,7 +99,7 @@ public partial class MainWindow : Window
 
     private void Search_Changed(object sender, TextChangedEventArgs e)
     {
-        if (_dek is not null && !_refreshing) RefreshEntries();
+        if (_dek is not null && !_refreshing) FilterEntries();
     }
 
     private void Entries_SelectionChanged(object sender, SelectionChangedEventArgs e)
