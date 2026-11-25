@@ -1,0 +1,41 @@
+
+name: SonarQube Cloud - analiza C#
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: windows-latest
+
+    steps:
+      - name: Pobierz repozytorium
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Zainstaluj .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Zainstaluj SonarScanner
+        run: dotnet tool install --global dotnet-sonarscanner
+
+      - name: Analiza kodu C#
+        shell: pwsh
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
+          SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
+        run: |
+          dotnet sonarscanner begin /k:"$env:SONAR_PROJECT_KEY" /o:"$env:SONAR_ORGANIZATION" /d:sonar.token="$env:SONAR_TOKEN"
+
+          dotnet build "Password-Vault/Password-Vault.slnx" --configuration Release --no-incremental
+
+          dotnet sonarscanner end /d:sonar.token="$env:SONAR_TOKEN"
