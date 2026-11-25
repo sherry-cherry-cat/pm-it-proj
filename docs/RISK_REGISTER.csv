@@ -1,8 +1,0 @@
-id,ryzyko,prawdopodobienstwo,wplyw,co_zrobie,plan_awaryjny,status
-R-01,Brak czasu na cały zakres,Wysokie,Wysoki,Skupię się na funkcjach obowiązkowych,Windows Hello i wygląd UI przeniosę poza MVP,Otwarte
-R-02,Błąd w szyfrowaniu,Średnie,Wysoki,Testy poprawnego i błędnego hasła oraz integralności,Wstrzymam zapis prawdziwych danych i poprawię moduł,Otwarte
-R-03,Problemy z pakietami NuGet,Średnie,Średni,Zapiszę wersje w csproj i przetestuję na VS 2026,Wrócę do ostatniej działającej wersji,Otwarte
-R-04,CI nie uruchamia testów C#,Średnie,Wysoki,Workflow uruchomi dokładny projekt xUnit,Sprawdzę logi i poprawię konfigurację,Otwarte
-R-05,Przypadkowe dodanie haseł do Git,Niskie,Wysoki,Gitignore i tylko fikcyjne dane testowe,Usunę plik i unieważnię ujawnione sekrety,Otwarte
-R-06,Problemy z importem sejfu,Średnie,Wysoki,Sprawdzę import na innym profilu Windows,Zostawię import prosty bez synchronizacji,Otwarte
-R-07,Zmiany API Windows Hello,Średnie,Niski,To funkcja opcjonalna,Nie dodam jej do MVP,Otwarte
