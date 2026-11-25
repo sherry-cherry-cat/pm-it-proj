@@ -1,70 +1,40 @@
-# Visual Studio / Rider / tooling
+# Visual Studio / .NET
 .vs/
 .idea/
 .vscode/
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-*.rsuser
-*.DotSettings.user
-
-# Build and package outputs
 bin/
 obj/
-Debug/
-Release/
-artifacts/
 TestResults/
 coverage/
-*.coverage
-*.coveragexml
+*.user
+*.suo
+*.rsuser
+*.DotSettings.user
 *.trx
-*.nupkg
-*.snupkg
 
-# Local user configuration and secrets
+# Dane lokalne i klucze
 .env
 .env.*
 !.env.example
-**/secrets.json
-**/secrets.*.json
-appsettings.Development.local.json
 *.pfx
-*.p12
 *.pem
 *.key
 *.keyfile
-
-# PasswordVault user data (never commit real vaults)
-*.db
-*.db-journal
-*.db-wal
-*.db-shm
 *.sqlite
 *.sqlite3
+*.db
+*.db-wal
+*.db-shm
 *.sqlite-wal
 *.sqlite-shm
 *.pvault
 *.pvault.*
 *.vaultbackup
-*.vault.enc
-*.bak
-*.backup
-
-# Local folders with real user secrets
 local-data/
-user-data/
 exports/
 backups/
 
-# OS/editor temporary files
+# System / tymczasowe
 Thumbs.db
 Desktop.ini
 *.tmp
-*.temp
-*~
-
-# Testowe paczki i pliki wynikowe
-*.trx
-*.pvault.json

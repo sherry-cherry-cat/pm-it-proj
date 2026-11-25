@@ -1,22 +1,17 @@
 name: Zadanie techniczne
-description: Zmiana w kodzie, testach lub konfiguracji
-title: "[Task] "
-labels: ["task"]
+description: Konfiguracja, testy albo poprawki
+title: "[TASK] "
+labels: [task]
 body:
   - type: textarea
     id: description
     attributes:
-      label: Co trzeba zrobić?
-      placeholder: Dodać testy odrzucenia błędnego hasła master.
+      label: Do zrobienia
+      placeholder: "Krótki opis zadania"
     validations:
       required: true
-  - type: input
-    id: backlog
-    attributes:
-      label: Powiązanie z backlogiem
-      placeholder: SEC-02
   - type: textarea
-    id: acceptance
+    id: done
     attributes:
-      label: Warunki zakończenia
-      placeholder: "- [ ] Testy przechodzą lokalnie i na GitHubie."
+      label: Jak sprawdzę, że działa?
+      placeholder: "Konkretna czynność lub wynik testu"

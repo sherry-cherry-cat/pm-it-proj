@@ -1,0 +1,10 @@
+﻿ID;Ryzyko;Prawdopodobieństwo;Wpływ;Reakcja;Odpowiedzialna;Status
+R01;Opóźnienie prac;Wysokie;Wysoki;Ograniczam MVP, nie robię chmury i Windows Hello;Autorka;Otwarte
+R02;Błąd w szyfrowaniu;Średnie;Wysoki;Używam znanych bibliotek i testów negatywnych;Autorka;Otwarte
+R03;Utrata pliku bazy;Średnie;Wysoki;Robię zaszyfrowane kopie i testuję import;Autorka;Otwarte
+R04;Zmiana wersji bibliotek/NuGet;Średnie;Średni;Przypinam wersje pakietów i sprawdzam restore;Autorka;Otwarte
+R05;Czerwone GitHub Actions;Średnie;Średni;Uruchamiam build/test lokalnie przed PR;Autorka;Otwarte
+R06;Błędy GUI WPF;Średnie;Średni;Zostawiam prosty widok bez dodatkowych kontrolek;Autorka;Otwarte
+R07;Uszkodzony import;Średnie;Wysoki;Sprawdzam hasło i wszystkie wpisy przed zmianą bazy;Autorka;Otwarte
+R08;Za dużo funkcji w backlogu;Wysokie;Średni;Funkcje dodatkowe przenoszę poza MVP;Autorka;Otwarte
+R09;Brak dowodów do raportu;Średnie;Średni;Zapisuję screeny z VS/Actions oraz linki do PR;Autorka;Otwarte

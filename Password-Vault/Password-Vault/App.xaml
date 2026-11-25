@@ -1,9 +1,28 @@
-﻿<Application x:Class="Password_Vault.App"
+<Application x:Class="Password_Vault.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Password_Vault"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#F4F6F9" />
+        <SolidColorBrush x:Key="PrimaryBrush" Color="#2166C2" />
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="0,6,8,6" />
+            <Setter Property="Padding" Value="12,8" />
+            <Setter Property="MinHeight" Value="34" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="0,3,0,9" />
+            <Setter Property="Padding" Value="8,6" />
+            <Setter Property="MinHeight" Value="34" />
+        </Style>
+        <Style TargetType="PasswordBox">
+            <Setter Property="Margin" Value="0,3,0,9" />
+            <Setter Property="Padding" Value="8,6" />
+            <Setter Property="MinHeight" Value="34" />
+        </Style>
+        <Style TargetType="TextBlock" x:Key="FieldLabel">
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="#38465A" />
+        </Style>
     </Application.Resources>
 </Application>

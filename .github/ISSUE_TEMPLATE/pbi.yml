@@ -1,27 +1,29 @@
-name: Funkcja (backlog)
-description: Opis nowej funkcji w projekcie PasswordVault
-title: "[PBI] "
-labels: ["enhancement"]
-body:
-  - type: textarea
-    id: description
-    attributes:
-      label: Co chcę zrobić?
-      description: Krótki opis funkcji.
-      placeholder: Jako użytkownik chcę dodać konto do sejfu.
-    validations:
-      required: true
-  - type: textarea
-    id: acceptance
-    attributes:
-      label: Jak sprawdzę działanie?
-      placeholder: "- [ ] Po dodaniu konta widzę je na liście."
-    validations:
-      required: true
-  - type: dropdown
-    id: priority
-    attributes:
-      label: Priorytet
-      options: [MUST, SHOULD, COULD]
-    validations:
-      required: true
+    name: User Story / funkcja
+    description: Nowa funkcja z backlogu
+    title: "[US] "
+    labels: [feature]
+    body:
+      - type: textarea
+        id: story
+        attributes:
+          label: User Story
+          placeholder: "Jako użytkowniczka chcę ..., aby ..."
+        validations:
+          required: true
+      - type: textarea
+        id: ac
+        attributes:
+          label: Kryteria akceptacji
+          placeholder: "1. ...
+2. ..."
+        validations:
+          required: true
+      - type: dropdown
+        id: sprint
+        attributes:
+          label: Sprint
+          options:
+            - Sprint 1
+            - Sprint 2
+            - Sprint 3
+            - Poza MVP

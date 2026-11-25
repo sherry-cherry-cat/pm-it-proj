@@ -1,8 +1,8 @@
-name: Build i testy .NET
+name: .NET - build, test i format
 
 on:
   push:
-    branches: [main, 'chore/**', 'feature/**', 'docs/**']
+    branches: ['**']
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -11,25 +11,27 @@ permissions:
   contents: read
 
 jobs:
-  dotnet:
+  verify:
     runs-on: windows-latest
     steps:
       - name: Pobierz repozytorium
         uses: actions/checkout@v4
       - name: Zainstaluj .NET 10
-        uses: actions/setup-dotnet@v6
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '10.0.x'
-      - name: Przywroc pakiety
-        run: dotnet restore 'Password-Vault/Password-Vault.slnx'
-      - name: Zbuduj rozwiazanie
-        run: dotnet build 'Password-Vault/Password-Vault.slnx' --configuration Release --no-restore
-      - name: Uruchom testy
-        run: dotnet test 'Password-Vault/Password-Vault.Tests/PasswordVault.Tests.csproj' --configuration Release --no-build --logger "trx;LogFileName=unit-tests.trx"
-      - name: Zapisz wyniki testow
+      - name: Restore
+        run: dotnet restore Password-Vault/Password-Vault.slnx
+      - name: Build
+        run: dotnet build Password-Vault/Password-Vault.slnx --configuration Release --no-restore
+      - name: Testy jednostkowe
+        run: dotnet test Password-Vault/PasswordVault.Tests/PasswordVault.Tests.csproj --configuration Release --no-build --logger "trx;LogFileName=test-results.trx"
+      - name: Format (lint)
+        run: dotnet format whitespace Password-Vault/Password-Vault.slnx --verify-no-changes --no-restore
+      - name: Wynik testow
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: wyniki-testow
+          name: test-results
           path: '**/TestResults/*.trx'
           if-no-files-found: ignore

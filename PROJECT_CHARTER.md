@@ -1,38 +1,37 @@
-# Karta projektu — PasswordVault
+# Project Charter — PasswordVault
 
-**Okres projektu:** 1 listopada – 15 grudnia 2026 r.  
+**Temat:** desktopowy menedżer haseł dla Windows  
 **Realizacja:** indywidualna  
-**Technologia:** C#, WPF, .NET 10, SQLite
+**Termin projektu (przyjęty w planie):** 15.12.2026
 
 ## Cel
-Do 15 grudnia chcę przygotować działającą aplikację desktopową na Windows do przechowywania haseł w zaszyfrowanym sejfie. Planuję sprawdzić działanie na co najmniej 20 fikcyjnych wpisach oraz pokazać eksport i import zaszyfrowanego pliku. Kod ma być testowany lokalnie i przez GitHub Actions.
 
-## Po co ten projekt?
-Chcę przećwiczyć tworzenie aplikacji w C#, rozdzielenie logiki od interfejsu i podstawy bezpiecznego przechowywania danych. Projekt będzie też służył do pokazania pracy ze sprintami, GitHub Issues, Pull Requestami i testami.
+Przygotuję prosty program, który pozwala utworzyć lokalny sejf, odblokować go hasłem master, zapisać co najmniej 20 przykładowych kont i przenieść ich zaszyfrowaną kopię do pliku. Do końca projektu chcę mieć też testy automatyczne, trzy podsumowania sprintów i działający workflow GitHub Actions.
 
-## Zakres obowiązkowy
-- Tworzenie i otwieranie sejfu hasłem master.
-- Losowy klucz DEK szyfrujący dane; KEK wyprowadzany z hasła master.
-- Lokalna baza SQLite i dodawanie, edycja oraz usuwanie kont.
-- Lista zapisanych kont i maskowanie haseł.
-- Eksport zaszyfrowanego sejfu do wybranego pliku i import na innym Windowsie.
-- Testy podstawowych operacji i CI.
+## Zakres
 
-## Co odkładam na później
-Windows Hello, automatyczna synchronizacja z chmurą, obsługa TOTP i wersja mobilna. Dla tego terminu te funkcje zbyt łatwo rozbudowałyby zakres.
+**W projekcie:** WPF, C#/.NET 10, SQLite, dodawanie/edycja/usuwanie kont, losowy generator hasła, szyfrowanie Argon2id i AES-GCM, eksport/import pliku, testy i dokumentacja.
 
-## Harmonogram
-| Etap | Termin | Planowany efekt |
-|---|---|---|
-| Sprint 1 | 1–15 listopada | Projekt WPF, podział na biblioteki, podstawy szyfrowania, CI |
-| Sprint 2 | 16–29 listopada | Baza danych, wpisy i interfejs |
-| Sprint 3 | 30 listopada – 13 grudnia | Eksport/import, testy, poprawki |
-| Oddanie | 14–15 grudnia | Podsumowanie, demonstracja, wersja końcowa |
+**Poza projektem:** automatyczna synchronizacja z chmurą, współdzielenie sejfu między użytkownikami, aplikacja mobilna i Windows Hello. Te funkcje mogłyby być rozbudową, ale nie są potrzebne do pokazania podstawowej wersji.
 
-## Największe ryzyka
-Brak czasu przy pracy indywidualnej, błędy w szyfrowaniu, problemy z konfiguracją CI i zależnościami NuGet. Szczegóły są w `RISK_REGISTER.csv`. Jeśli pojawi się opóźnienie, ograniczę wygląd interfejsu i funkcje dodatkowe, ale nie pominę testów kryptografii.
+## Interesariusze
 
-## Jak sprawdzę wynik?
-Przeprowadzę scenariusze z `docs/ACCEPTANCE_CRITERIA.md` i pokażę wyniki testów na GitHubie. Do prezentacji użyję wyłącznie danych testowych.
+- **Autorka:** planuję sprinty, piszę kod, testuję i prowadzę repozytorium.
+- **Użytkowniczka testowa:** chcę móc zapisać i odzyskać własne wpisy z sejfu.
+- **Prowadzący:** sprawdza dokumentację, przebieg prac i efekt demonstracji.
 
-**Uwaga:** harmonogram jest planem, nie historią zakończonych zadań.
+## Kryteria sukcesu
+
+- Aplikacja uruchamia się na Windows 11.
+- Da się zapisać 20 testowych wpisów, zamknąć program i odczytać wpisy po odblokowaniu.
+- Błędne hasło nie odblokowuje sejfu.
+- Eksportowany plik da się zaimportować do pustego sejfu i odblokować hasłem master.
+- Testy i kompilacja przechodzą w GitHub Actions, a dokumentacja pokazuje trzy sprinty.
+
+## Założenia i ograniczenia
+
+Pracuję sama, korzystam z Visual Studio 2026 i GitHuba. Na projekt mam ograniczony czas, dlatego ważniejsze jest działające MVP niż dodatkowe funkcje. Program przeznaczony jest do demonstracji na danych testowych, bez audytu bezpieczeństwa.
+
+## Główne ryzyka
+
+Największe zagrożenia to obsunięcie terminów, błędy w szyfrowaniu, kłopoty z NuGet i GitHub Actions oraz utrata danych podczas importu. Opisałam je w `RISK_REGISTER.csv` i staram się ograniczać testami oraz kopiami zapasowymi.

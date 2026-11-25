@@ -1,10 +1,90 @@
-﻿<Window x:Class="Password_Vault.MainWindow"
+<Window x:Class="Password_Vault.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Password_Vault"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Button Content="Hello Word" HorizontalAlignment="Left" Margin="262,104,0,0" VerticalAlignment="Top" Height="26" Width="217" Click="Button_Click"/>
+        Title="PasswordVault" Height="760" Width="1080" MinHeight="640" MinWidth="850"
+        Background="{StaticResource BackgroundBrush}" WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing">
+    <Grid Margin="22">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Margin="0,0,0,18">
+            <StackPanel DockPanel.Dock="Left">
+                <TextBlock Text="PasswordVault" FontSize="29" FontWeight="Bold" Foreground="#14253D" />
+                <TextBlock Text="Lokalny menedżer haseł — projekt na zajęcia" Foreground="#6A7B90" />
+            </StackPanel>
+        </DockPanel>
+
+        <Border x:Name="LockedPanel" Grid.Row="1" Background="White" CornerRadius="16" Padding="30" MaxWidth="590" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Width="480">
+                <TextBlock x:Name="LockTitle" Text="Otwórz sejf" FontSize="24" FontWeight="SemiBold" Margin="0,0,0,12" />
+                <TextBlock x:Name="LockHelp" TextWrapping="Wrap" Foreground="#566579" Margin="0,0,0,18" />
+                <TextBlock Text="Hasło master" Style="{StaticResource FieldLabel}" />
+                <PasswordBox x:Name="MasterInput" />
+                <StackPanel x:Name="ConfirmRow">
+                    <TextBlock Text="Powtórz hasło master" Style="{StaticResource FieldLabel}" />
+                    <PasswordBox x:Name="ConfirmInput" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                    <Button x:Name="CreateButton" Content="Utwórz sejf" Click="Create_Click" Background="#2166C2" Foreground="White" />
+                    <Button x:Name="UnlockButton" Content="Odblokuj" Click="Unlock_Click" Background="#2166C2" Foreground="White" />
+                    <Button Content="Importuj plik..." Click="Import_Click" />
+                </StackPanel>
+                <TextBlock Text="Nie ma możliwości odzyskania hasła master. Używaj wyłącznie danych testowych w tym projekcie."
+                           Foreground="#8A4C39" TextWrapping="Wrap" Margin="0,15,0,0" />
+            </StackPanel>
+        </Border>
+
+        <Grid x:Name="VaultPanel" Grid.Row="1" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="310" />
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Background="White" CornerRadius="12" Padding="14">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top">
+                        <TextBlock Text="Zapisane konta" FontSize="20" FontWeight="SemiBold" />
+                        <TextBox x:Name="SearchInput" Margin="0,12,0,8" ToolTip="Wyszukaj po nazwie" TextChanged="Search_Changed" />
+                        <Button Content="+ Nowy wpis" Click="New_Click" Background="#2166C2" Foreground="White" />
+                    </StackPanel>
+                    <ListBox x:Name="EntriesList" Margin="0,12,0,0" FontSize="15"
+                             DisplayMemberPath="Title" BorderThickness="0"
+                             SelectionChanged="Entries_SelectionChanged" />
+                </DockPanel>
+            </Border>
+            <Border Grid.Column="2" Background="White" CornerRadius="12" Padding="22">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="Szczegóły konta" FontSize="21" FontWeight="SemiBold" Margin="0,0,0,14" />
+                        <TextBlock Text="Nazwa serwisu" Style="{StaticResource FieldLabel}" />
+                        <TextBox x:Name="TitleInput" MaxLength="200" />
+                        <TextBlock Text="Adres strony" Style="{StaticResource FieldLabel}" />
+                        <TextBox x:Name="UrlInput" MaxLength="500" />
+                        <TextBlock Text="Login" Style="{StaticResource FieldLabel}" />
+                        <TextBox x:Name="UsernameInput" MaxLength="300" />
+                        <TextBlock Text="Hasło" Style="{StaticResource FieldLabel}" />
+                        <PasswordBox x:Name="EntryPasswordInput" />
+                        <TextBox x:Name="VisiblePasswordInput" Visibility="Collapsed" />
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                            <CheckBox x:Name="ShowPasswordBox" Content="Pokaż hasło" Click="ShowPassword_Click" VerticalAlignment="Center" Margin="0,0,14,0" />
+                            <Button Content="Wygeneruj" Click="Generate_Click" />
+                            <Button Content="Kopiuj hasło" Click="Copy_Click" />
+                        </StackPanel>
+                        <TextBlock Text="Notatka" Style="{StaticResource FieldLabel}" />
+                        <TextBox x:Name="NotesInput" Height="85" TextWrapping="Wrap" AcceptsReturn="True" VerticalContentAlignment="Top" />
+                        <StackPanel Orientation="Horizontal" Margin="0,16,0,2">
+                            <Button Content="Zapisz" Click="Save_Click" Background="#2166C2" Foreground="White" />
+                            <Button Content="Usuń" Click="Delete_Click" />
+                            <Button Content="Eksport sejfu..." Click="Export_Click" />
+                            <Button Content="Zablokuj" Click="Lock_Click" />
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+        <TextBlock x:Name="StatusText" Grid.Row="2" Margin="0,12,0,0" Foreground="#627388" Text="Gotowe" />
+    </Grid>
 </Window>
