@@ -1,4 +1,4 @@
-name: SonarQube
+name: SonarQube & Quality Check
 on:
   push:
     branches:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build and analyze
+    name: Build, Test & Analyze
     runs-on: windows-latest
     steps:
       - name: Set up JDK 21
@@ -51,12 +51,43 @@ jobs:
           New-Item -Path ${{ runner.temp }}\scanner -ItemType Directory -Force
           dotnet tool update dotnet-sonarscanner --tool-path ${{ runner.temp }}\scanner
 
-      - name: Build and analyze
+      - name: Check NuGet vulnerabilities
+        shell: powershell
+        run: |
+          dotnet restore "Password-Vault/Password-Vault.slnx"
+          dotnet list "Password-Vault/Password-Vault.slnx" package --vulnerable --include-transitive
+
+      - name: Build, Test & SonarCloud Analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          & "${{ runner.temp }}\scanner\dotnet-sonarscanner" begin /k:"sherry-cherry-cat_pm-it-proj" /o:"sherry-cherry-cat" /d:sonar.token="$env:SONAR_TOKEN" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build "Password-Vault/Password-Vault.slnx" --configuration Release
-          dotnet test "Password-Vault/Password-Vault.slnx" --configuration Release --no-build
+          & "${{ runner.temp }}\scanner\dotnet-sonarscanner" begin `
+            /k:"sherry-cherry-cat_pm-it-proj" `
+            /o:"sherry-cherry-cat" `
+            /d:sonar.token="$env:SONAR_TOKEN" `
+            /d:sonar.host.url="https://sonarcloud.io" `
+            /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" `
+            /d:sonar.coverage.exclusions="**/*Window.xaml.cs,**/App.xaml.cs,**/Migrations/**"
+
+          dotnet build "Password-Vault/Password-Vault.slnx" `
+            --configuration Release `
+            --no-restore `
+            -p:AnalysisLevel=latest-recommended
+
+          dotnet test "Password-Vault/Password-Vault.slnx" `
+            --configuration Release `
+            --no-build `
+            --collect:"XPlat Code Coverage;Format=opencover" `
+            --logger "trx;LogFileName=test-results.trx"
+
           & "${{ runner.temp }}\scanner\dotnet-sonarscanner" end /d:sonar.token="$env:SONAR_TOKEN"
+
+      - name: Upload Test & Coverage Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-and-coverage-reports
+          path: |
+            **/TestResults/*.trx
+            **/TestResults/**/coverage.opencover.xml
