@@ -1,4 +1,3 @@
-
 name: SonarQube Cloud - analiza C#
 
 on:
@@ -12,6 +11,10 @@ permissions:
 jobs:
   analyze:
     runs-on: windows-latest
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
+      SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
 
     steps:
       - name: Pobierz repozytorium
@@ -24,18 +27,34 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      - name: Zainstaluj SonarScanner
-        run: dotnet tool install --global dotnet-sonarscanner
-
-      - name: Analiza kodu C#
+      - name: Sprawdz ustawienia SonarQube
         shell: pwsh
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_PROJECT_KEY: ${{ vars.SONAR_PROJECT_KEY }}
-          SONAR_ORGANIZATION: ${{ vars.SONAR_ORGANIZATION }}
         run: |
-          dotnet sonarscanner begin /k:"$env:SONAR_PROJECT_KEY" /o:"$env:SONAR_ORGANIZATION" /d:sonar.token="$env:SONAR_TOKEN"
+          if ([string]::IsNullOrWhiteSpace($env:SONAR_TOKEN)) {
+            throw "Brak SONAR_TOKEN. Dodaj Repository secret w Settings > Secrets and variables > Actions."
+          }
+          if ([string]::IsNullOrWhiteSpace($env:SONAR_PROJECT_KEY)) {
+            throw "Brak SONAR_PROJECT_KEY. Dodaj Repository variable w GitHub Actions."
+          }
+          if ([string]::IsNullOrWhiteSpace($env:SONAR_ORGANIZATION)) {
+            throw "Brak SONAR_ORGANIZATION. Dodaj Repository variable w GitHub Actions."
+          }
+          Write-Host "Ustawienia SonarQube sa dostepne."
+
+      - name: Zainstaluj SonarScanner dla .NET
+        shell: pwsh
+        run: |
+          dotnet tool install --global dotnet-sonarscanner
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Analizuj aplikacje C#
+        shell: pwsh
+        run: |
+          dotnet sonarscanner begin /k:"$env:SONAR_PROJECT_KEY" /o:"$env:SONAR_ORGANIZATION" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.token="$env:SONAR_TOKEN"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
           dotnet build "Password-Vault/Password-Vault.slnx" --configuration Release --no-incremental
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
           dotnet sonarscanner end /d:sonar.token="$env:SONAR_TOKEN"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
