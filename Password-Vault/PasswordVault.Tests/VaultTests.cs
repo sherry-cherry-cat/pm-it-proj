@@ -159,6 +159,36 @@ public sealed class VaultTests
         }
     }
 
+    [Fact]
+    public void ResetUsuwaLokalnySejfIPozwalaUtworzycNowy()
+    {
+        string path = TempPath();
+        string export = Path.Combine(Path.GetTempPath(), Guid.NewGuid() + ".pvault");
+        try
+        {
+            var store = new VaultRepository(path);
+            byte[] oldKey = store.Create(Master);
+            store.Save(new VaultEntry { Title = "Testowy serwis", Password = "TajneHaslo123" }, oldKey);
+            store.Export(export);
+            string exportedBefore = File.ReadAllText(export);
+
+            store.Reset();
+
+            Assert.False(store.Exists());
+            Assert.Equal(exportedBefore, File.ReadAllText(export));
+            byte[] newKey = store.Create("NoweHasloMaster!2026");
+            Assert.Empty(store.GetEntries(newKey));
+            Assert.Throws<CryptographicException>(() => store.Unlock(Master));
+            CryptographicOperations.ZeroMemory(oldKey);
+            CryptographicOperations.ZeroMemory(newKey);
+        }
+        finally
+        {
+            Cleanup(path);
+            if (File.Exists(export)) File.Delete(export);
+        }
+    }
+
     private static void Cleanup(string path)
     {
         string? folder = Path.GetDirectoryName(path);
