@@ -32,7 +32,10 @@
                     <Button x:Name="UnlockButton" Content="Odblokuj" Click="Unlock_Click" Background="#2166C2" Foreground="White" />
                     <Button Content="Importuj plik..." Click="Import_Click" />
                 </StackPanel>
-                <TextBlock Text="Nie ma możliwości odzyskania hasła master."
+                <Button x:Name="ResetLockedButton" Content="Zresetuj menedżer haseł"
+                        Click="Reset_Click" Foreground="#A32F2F" HorizontalAlignment="Left"
+                        Margin="0,8,0,0" />
+                <TextBlock Text="Nie ma możliwości odzyskania hasła master. Używaj wyłącznie danych testowych w tym projekcie."
                            Foreground="#8A4C39" TextWrapping="Wrap" Margin="0,15,0,0" />
             </StackPanel>
         </Border>
@@ -97,6 +100,9 @@
                             <Button Content="Eksport sejfu..." Click="Export_Click" />
                             <Button Content="Zablokuj" Click="Lock_Click" />
                         </StackPanel>
+                        <Button Content="Zresetuj menedżer haseł" Click="Reset_Click"
+                                Foreground="#A32F2F" HorizontalAlignment="Left"
+                                Margin="0,8,0,0" />
                     </StackPanel>
                 </ScrollViewer>
             </Border>

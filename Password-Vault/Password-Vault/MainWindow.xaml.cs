@@ -35,6 +35,7 @@ public partial class MainWindow : Window
         CreateButton.Visibility = hasVault ? Visibility.Collapsed : Visibility.Visible;
         UnlockButton.Visibility = hasVault ? Visibility.Visible : Visibility.Collapsed;
         ConfirmRow.Visibility = hasVault ? Visibility.Collapsed : Visibility.Visible;
+        ResetLockedButton.Visibility = hasVault ? Visibility.Visible : Visibility.Collapsed;
         MasterInput.Clear();
         ConfirmInput.Clear();
         StatusText.Text = hasVault ? "Sejf zablokowany" : "Nie znaleziono sejfu";
@@ -245,6 +246,29 @@ public partial class MainWindow : Window
             _dek = _store.Unlock(password);
             ShowOpen();
             StatusText.Text = "Zaimportowano sejf.";
+        });
+    }
+
+    private void Reset_Click(object sender, RoutedEventArgs e)
+    {
+        const string warning =
+            "Czy na pewno chcesz zresetować menedżer haseł?\n\n" +
+            "Wszystkie lokalnie zapisane konta i obecne hasło master zostaną usunięte. " +
+            "Bez wcześniej wyeksportowanej kopii sejfu nie będzie można odzyskać tych danych.\n\n" +
+            "Pliki .pvault, które zostały wcześniej wyeksportowane, pozostaną bez zmian.";
+
+        if (MessageBox.Show(warning, "Potwierdzenie resetowania",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning,
+                MessageBoxResult.No) != MessageBoxResult.Yes)
+        {
+            return;
+        }
+
+        RunAction(() =>
+        {
+            _store.Reset();
+            ShowLocked(); // Czyści klucz DEK z pamięci i pokazuje tworzenie nowego sejfu.
+            StatusText.Text = "Sejf zresetowany. Możesz utworzyć nowy.";
         });
     }
 

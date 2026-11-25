@@ -41,6 +41,20 @@ public sealed class VaultRepository
         return db.Metadata.Any(m => m.Id == 1);
     }
 
+    public void Reset()
+    {
+        // Usuwa lokalną bazę sejfu i tworzy pustą bazę z tym samym schematem.
+        // Wcześniej wyeksportowane pliki .pvault nie są modyfikowane.
+        using (var db = Open())
+        {
+            db.Database.EnsureDeleted();
+        }
+        using (var db = Open())
+        {
+            db.Database.EnsureCreated();
+        }
+    }
+
     public byte[] Create(string password)
     {
         if (Exists())
