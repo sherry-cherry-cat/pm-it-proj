@@ -34,11 +34,15 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      - name: Zainstaluj SonarScanner
+      - name: Zainstaluj SonarScanner i dotnet-coverage
         shell: pwsh
-        run: dotnet tool install --global dotnet-sonarscanner
+        run: |
+          dotnet tool install --global dotnet-sonarscanner
+          if ($LASTEXITCODE -ne 0) { throw 'Nie udalo sie zainstalowac SonarScanner.' }
+          dotnet tool install --global dotnet-coverage
+          if ($LASTEXITCODE -ne 0) { throw 'Nie udalo sie zainstalowac dotnet-coverage.' }
 
-      - name: Sprawdz sekret SonarQube
+      - name: Sprawdz token SonarQube
         shell: pwsh
         run: |
           if ([string]::IsNullOrWhiteSpace($env:SONAR_TOKEN)) {
@@ -59,8 +63,7 @@ jobs:
             /o:"sherry-cherry-cat" `
             /d:sonar.host.url="https://sonarcloud.io" `
             /d:sonar.token="$env:SONAR_TOKEN" `
-            /d:sonar.cs.opencover.reportsPaths="TestResults/**/coverage.opencover.xml" `
-            /d:sonar.verbose=true
+            /d:sonar.cs.vscoveragexml.reportsPaths="TestResults/coverage.xml"
           if ($LASTEXITCODE -ne 0) { throw 'SonarScanner begin nie powiodl sie.' }
 
       - name: Kompiluj rozwiazanie
@@ -69,39 +72,29 @@ jobs:
           dotnet build 'Password-Vault/Password-Vault.slnx' --configuration Release --no-restore
           if ($LASTEXITCODE -ne 0) { throw 'Build nie powiodl sie.' }
 
-      - name: Testy z pomiarem pokrycia OpenCover
+      - name: Testy i pokrycie kodu przez dotnet-coverage
         shell: pwsh
         run: |
           $coverageDir = Join-Path $env:GITHUB_WORKSPACE 'TestResults'
-          dotnet test 'Password-Vault/PasswordVault.Tests/PasswordVault.Tests.csproj' `
-            --configuration Release `
-            --no-build `
-            --results-directory "$coverageDir" `
-            --collect:"XPlat Code Coverage;Format=opencover" `
-            --logger 'trx;LogFileName=test-results.trx'
-          if ($LASTEXITCODE -ne 0) { throw 'Testy nie powiodly sie.' }
+          New-Item -ItemType Directory -Force -Path $coverageDir | Out-Null
+          $coverageFile = Join-Path $coverageDir 'coverage.xml'
+          $testCommand = 'dotnet test Password-Vault/PasswordVault.Tests/PasswordVault.Tests.csproj --configuration Release --no-build --logger trx --results-directory TestResults'
+          dotnet-coverage collect $testCommand -f xml -o "$coverageFile"
+          if ($LASTEXITCODE -ne 0) { throw 'Testy lub zbieranie pokrycia nie powiodly sie.' }
 
-      - name: Sprawdz czy raport OpenCover istnieje i zawiera dane
+      - name: Sprawdz raport pokrycia XML
         shell: pwsh
         run: |
-          $coverageDir = Join-Path $env:GITHUB_WORKSPACE 'TestResults'
-          $reports = @(Get-ChildItem -Path $coverageDir -Recurse -File -Filter 'coverage.opencover.xml' -ErrorAction SilentlyContinue)
-          if ($reports.Count -eq 0) {
-            Get-ChildItem -Path $coverageDir -Recurse -File -ErrorAction SilentlyContinue | Select-Object -ExpandProperty FullName
-            throw 'Brak pliku coverage.opencover.xml. Sprawdz collect/wersje test runnera.'
+          $coverageFile = Join-Path $env:GITHUB_WORKSPACE 'TestResults/coverage.xml'
+          if (-not (Test-Path -LiteralPath $coverageFile)) {
+            throw 'Brak TestResults/coverage.xml. dotnet-coverage nie wygenerowal raportu.'
           }
-          foreach ($report in $reports) {
-            Write-Host "Raport OpenCover: $($report.FullName) ($($report.Length) bajtow)"
-            [xml]$xml = Get-Content -LiteralPath $report.FullName -Raw
-            $summary = $xml.CoverageSession.Summary
-            if ($null -eq $summary) { throw "Nieprawidlowy raport OpenCover: $($report.FullName)" }
-            $total = [int]$summary.numSequencePoints
-            $visited = [int]$summary.visitedSequencePoints
-            Write-Host "Punkty kodu: $total; wykonane przez testy: $visited"
-            if ($total -eq 0 -or $visited -eq 0) {
-              throw 'Raport OpenCover istnieje, ale nie zawiera pokrycia. Sprawdz Coverlet i .NET 10.'
-            }
-          }
+          $file = Get-Item -LiteralPath $coverageFile
+          Write-Host "Raport pokrycia: $($file.FullName), rozmiar: $($file.Length) bajtow"
+          if ($file.Length -lt 200) { throw 'Raport XML jest podejrzanie maly.' }
+          try { [xml]$xml = Get-Content -LiteralPath $coverageFile -Raw }
+          catch { throw 'Raport pokrycia nie jest poprawnym plikiem XML.' }
+          Write-Host "Korzen XML: $($xml.DocumentElement.LocalName)"
 
       - name: Wyslij analize i pokrycie do SonarQube
         shell: pwsh
@@ -116,5 +109,5 @@ jobs:
           name: test-and-coverage-reports
           path: |
             TestResults/**/*.trx
-            TestResults/**/coverage.opencover.xml
+            TestResults/coverage.xml
           if-no-files-found: warn
