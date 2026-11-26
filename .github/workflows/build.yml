@@ -67,7 +67,7 @@ jobs:
             /o:"sherry-cherry-cat" `
             /d:sonar.token="$env:SONAR_TOKEN" `
             /d:sonar.host.url="https://sonarcloud.io" `
-            /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" `
+            /d:sonar.cs.opencover.reportsPaths="TestResults/**/coverage.opencover.xml" `
             /d:sonar.coverage.exclusions="**/*Window.xaml.cs,**/App.xaml.cs,**/Migrations/**"
 
           dotnet build "Password-Vault/Password-Vault.slnx" `
@@ -78,6 +78,7 @@ jobs:
           dotnet test "Password-Vault/Password-Vault.slnx" `
             --configuration Release `
             --no-build `
+            --results-directory ./TestResults `
             --collect:"XPlat Code Coverage;Format=opencover" `
             --logger "trx;LogFileName=test-results.trx"
 
@@ -89,5 +90,5 @@ jobs:
         with:
           name: test-and-coverage-reports
           path: |
-            **/TestResults/*.trx
-            **/TestResults/**/coverage.opencover.xml
+            TestResults/*.trx
+            TestResults/**/coverage.opencover.xml
