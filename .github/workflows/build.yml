@@ -62,12 +62,14 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
+          $coverageDir = "${{ github.workspace }}\TestResults"
+
           & "${{ runner.temp }}\scanner\dotnet-sonarscanner" begin `
             /k:"sherry-cherry-cat_pm-it-proj" `
             /o:"sherry-cherry-cat" `
             /d:sonar.token="$env:SONAR_TOKEN" `
             /d:sonar.host.url="https://sonarcloud.io" `
-            /d:sonar.cs.opencover.reportsPaths="TestResults/**/coverage.opencover.xml" `
+            /d:sonar.cs.opencover.reportsPaths="$coverageDir\**\coverage.opencover.xml" `
             /d:sonar.coverage.exclusions="**/*Window.xaml.cs,**/App.xaml.cs,**/Migrations/**"
 
           dotnet build "Password-Vault/Password-Vault.slnx" `
@@ -78,9 +80,11 @@ jobs:
           dotnet test "Password-Vault/Password-Vault.slnx" `
             --configuration Release `
             --no-build `
-            --results-directory ./TestResults `
+            --results-directory "$coverageDir" `
             --collect:"XPlat Code Coverage;Format=opencover" `
             --logger "trx;LogFileName=test-results.trx"
+
+          Get-ChildItem -Path "$coverageDir" -Recurse
 
           & "${{ runner.temp }}\scanner\dotnet-sonarscanner" end /d:sonar.token="$env:SONAR_TOKEN"
 
