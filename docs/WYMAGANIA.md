@@ -1,25 +1,34 @@
-# Wymagania aplikacji
+# Wymagania PasswordVault
 
-## Funkcjonalne
+Podzieliłam je na funkcjonalne (co robi aplikacja) i niefunkcjonalne (jak ma działać). Powiązania z backlogiem pozwalają sprawdzić, po co jest każde zadanie.
 
-| ID | Wymaganie | Jak sprawdzę |
+## Wymagania funkcjonalne
+
+| ID | Wymaganie | Zadanie | Kryteria |
+|---|---|---|---|
+| F-01 | Tworzenie sejfu przy pierwszym uruchomieniu. | SEC-01 | AC-01 |
+| F-02 | Odblokowanie hasłem master i odmowa dostępu po złym haśle. | SEC-02 | AC-02, AC-03 |
+| F-03 | Dodanie, edycja i usuwanie wpisów. | US-01, US-02, US-03 | AC-04, AC-05 |
+| F-04 | Lista wpisów i wyszukiwanie po nazwie. | US-04 | AC-06 |
+| F-05 | Generowanie losowego hasła. | US-05 | AC-09 |
+| F-06 | Eksport sejfu do wybranego pliku i import kopii. | PORT-01, PORT-02 | AC-10, AC-11, AC-12 |
+| F-07 | Reset lokalnego sejfu po potwierdzeniu. | US-06 | AC-13 |
+
+## Wymagania niefunkcjonalne
+
+| ID | Wymaganie | Jak je sprawdzę |
 |---|---|---|
-| F-01 | Mogę utworzyć sejf z hasłem master. | Pierwsze uruchomienie i utworzenie pliku. |
-| F-02 | Mogę odblokować sejf. | Dobre hasło działa, złe nie. |
-| F-03 | Mogę dodać, zmienić i usunąć konto. | Zmiany są widoczne po ponownym otwarciu. |
-| F-04 | Mogę wyszukać konto po nazwie. | Lista filtruje wyniki. |
-| F-05 | Mogę wygenerować losowe hasło. | Hasło ma 20 znaków, kolejne próby są różne. |
-| F-06 | Mogę wyeksportować i zaimportować sejf. | Eksport w `.pvault`, import na drugiej instalacji. |
-| F-07 | Mogę wyczyścić lokalny sejf po potwierdzeniu. | Przy anulowaniu dane zostają, po potwierdzeniu można utworzyć nowy sejf. |
+| NF-01 | Wpisy w SQLite są przechowywane jako szyfrogramy, bez jawnych haseł. | Kontrola modelu bazy i test zapisu. |
+| NF-02 | Szyfrowanie wykrywa naruszenie integralności danych. | Testy AES-GCM dla zmodyfikowanego szyfrogramu. |
+| NF-03 | Aplikacja działa na Windows i buduje się na .NET 10. | Uruchomienie w Visual Studio i build CI. |
+| NF-04 | Testy i kontrola formatowania są uruchamiane przez GitHub Actions. | Zielone kroki build/test/format. |
+| NF-05 | Nieudany import nie niszczy poprzedniego sejfu. | Test automatyczny i ręczny z błędnym plikiem. |
+| NF-06 | Dane testowe nie trafiają do repozytorium. | `.gitignore`, przegląd `Git Changes`. |
 
-## Niefunkcjonalne
+## Poza zakresem pierwszej wersji
 
-| ID | Wymaganie | Jak sprawdzę |
-|---|---|---|
-| NF-01 | Dane wpisów nie są zapisywane jawnie w SQLite. | Kontrola bazy i test zapisu. |
-| NF-02 | Zmiana szyfrogramu jest wykrywana. | Negatywny test AES-GCM. |
-| NF-03 | Projekt uruchamia się na Windows 11 i .NET 10. | Build i ręczne uruchomienie. |
-| NF-04 | Testy automatyczne uruchamiają się po push/PR. | Wynik GitHub Actions. |
-| NF-05 | Zły import nie niszczy poprzedniego sejfu. | Test z błędnym hasłem i ponowny odczyt. |
+- Windows Hello jako dodatkowe potwierdzenie działań (`OPT-01`).
+- Automatyczna synchronizacja pliku przez usługę chmurową (`OPT-02`).
+- Zmiana silnika bazy danych z SQLite na inny (`OPT-03`).
 
-Wymagania są ograniczone do lokalnej wersji. Nie obiecuję usługi sieciowej ani dostępności 24/7, bo aplikacja działa na komputerze użytkowniczki.
+Są to pomysły na przyszłość, a nie brakujące kryteria akceptacji MVP.

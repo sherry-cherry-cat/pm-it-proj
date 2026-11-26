@@ -1,23 +1,25 @@
-﻿ID;Tytuł;Typ;User Story / opis;Sprint;Priorytet;Story points;Kryteria akceptacji;Kategoria;Status
-DOC-01;Karta projektu i ryzyka;TASK;Opis projektu, zakres i ryzyka;S1;Must;2;PROJECT_CHARTER i rejestr ryzyk są spójne;Dokumentacja;Przygotowane – do przejrzenia
-DOC-02;Backlog i User Stories;TASK;Wymagania i historyjki użytkownika;S1;Must;3;Każda funkcja MVP ma kryterium akceptacji;Dokumentacja;Przygotowane – do przejrzenia
-DEV-01;Szkielet aplikacji WPF;TASK;Projekt Visual Studio 2026 z podziałem na moduły;S1;Must;3;Solution zawiera cztery projekty;Kod;Zrobione – projekt się buduje
-SEC-01;Utworzenie sejfu;US;Jako użytkowniczka chcę utworzyć sejf, aby zapisywać w nim hasła.;S1;Must;5;"AC-01; losowy DEK i nagłówek";Bezpieczeństwo;Kod przygotowany – do przetestowania
-SEC-02;Odblokowanie sejfu;US;Jako użytkowniczka chcę odblokować sejf, aby odczytać zapisane konta.;S1;Must;5;"AC-02, AC-03; błędne hasło jest odrzucone";Bezpieczeństwo;Kod przygotowany – do przetestowania
-CI-01;Workflow GitHub Actions;TASK;Automatyczny build, test i lint;S1;Must;3;Po push/PR trzy etapy przechodzą na zielono;Jakość;Plik gotowy – czekam na wynik Actions
-DATA-01;Baza SQLite;TASK;Trwały zapis szyfrogramów przez EF Core;S2;Must;5;"AC-07; baza powstaje lokalnie";Kod;Kod przygotowany – do przetestowania
-US-01;Dodanie konta;US;Jako użytkowniczka chcę dodać login i hasło, aby nie zapamiętywać ich ręcznie.;S2;Must;3;"AC-04; po restarcie wpis nadal istnieje";Funkcja;Kod przygotowany – do przetestowania
-US-02;Edycja konta;US;Jako użytkowniczka chcę poprawić wpis, aby zapisać nowe hasło.;S2;Must;2;"AC-05; zmiana jest trwała";Funkcja;Kod przygotowany – do przetestowania
-US-03;Usunięcie konta;US;Jako użytkowniczka chcę usunąć stary wpis, aby nie zaśmiecać sejfu.;S2;Must;2;"AC-05; inne wpisy zostają";Funkcja;Kod przygotowany – do przetestowania
-US-04;Lista i wyszukiwanie;US;Jako użytkowniczka chcę wyszukać konto po nazwie, aby szybko je znaleźć.;S2;Must;3;Wyszukiwanie filtruje listę;Funkcja;Poprawka przygotowana – do sprawdzenia
-US-05;Generator haseł;US;Jako użytkowniczka chcę wygenerować hasło, aby nie wymyślać go sama.;S2;Should;2;"AC-09; CSPRNG";Funkcja;Kod przygotowany – do przetestowania
-PORT-01;Eksport sejfu;US;Jako użytkowniczka chcę zapisać zaszyfrowaną kopię do pliku, aby przenieść sejf.;S3;Must;3;"AC-10; wybór ścieżki";Funkcja;Kod przygotowany – do przetestowania
-PORT-02;Import sejfu;US;Jako użytkowniczka chcę wczytać plik na innym komputerze, aby odzyskać zapisane konta.;S3;Must;5;"AC-11, AC-12; brak utraty danych po błędzie";Funkcja;Kod przygotowany – do przetestowania
-TEST-01;Testy jednostkowe;TASK;Scenariusze poprawne i błędne;S3;Must;3;xUnit w Test Explorer i CI;Jakość;Testy napisane – wynik do sprawdzenia
-TEST-02;Ręczna demonstracja;TASK;Przejście przez 20 danych testowych i import;S3;Must;3;AC-01–AC-12 z dowodami;Jakość;Do zrobienia
-DOC-03;Przeglądy sprintów i raport PDF;TASK;Trzy sprinty, wnioski i zrzuty ekranu;S3;Must;3;Raport PDF i link do repozytorium;Dokumentacja;Szkic raportu – do uzupełnienia
-OPT-01;Windows Hello;US;Jako użytkowniczka chcę potwierdzać operacje przez Windows Hello.;Poza MVP;Could;5;Funkcja odłożona;Opcjonalne;Poza zakresem
-OPT-02;Synchronizacja przez API chmury;US;Jako użytkowniczka chcę synchronizować sejf automatycznie.;Poza MVP;Wont;8;Funkcja poza zakresem;Opcjonalne;Poza zakresem
-US-06;Reset menedżera;US;Jako użytkowniczka chcę skasować lokalny sejf po potwierdzeniu, żeby zacząć od nowa.;S2;Should;2;Pytanie przed skasowaniem, anulowanie bez zmian, usunięcie tylko lokalnych danych.;Funkcja;Poprawka przygotowana – do sprawdzenia
-PM-01;Kanban w GitHub Projects;TASK;Przeniesienie zadań z backlogu na tablicę Todo / In Progress / Done.;S3;Could;2;Tablica połączona z Issues, statusy odpowiadają rzeczywistemu postępowi.;Zarządzanie;Do zrobienia
-QUAL-01;SonarQube Cloud;TASK;Analiza jakości kodu C# powiązana z repozytorium i GitHub Actions.;S3;Could;2;Widać wynik analizy projektu i screenshot w raporcie.;Jakość;Do skonfigurowania
+﻿ID;Tytuł;Typ;User Story / opis;Planowany sprint;Priorytet;Story points;Kryteria akceptacji;Kategoria;Stan na 26.11.2026;Zależności
+DOC-01;Project Charter i ryzyka;TASK;Opis celu SMART, zakresu, interesariuszy i ryzyk;S1;Must;2;PROJECT_CHARTER.md + RISK_REGISTER.csv są spójne;Dokumentacja;"Zrobione; przegląd 26.11";—
+DOC-02;Backlog i User Stories;TASK;Wymagania, historie użytkowniczki, priorytety i kryteria;S1;Must;3;Funkcje MVP mają Story i kryteria akceptacji;Dokumentacja;"Zrobione; uzupełnione 26.11";DOC-01
+DEV-01;Szkielet WPF;TASK;Rozwiązanie Visual Studio z rozdzielonymi projektami;S1;Must;3;Uruchamia się WPF i rozwiązanie się buduje;Kod;"Zrobione; cztery projekty w rozwiązaniu";—
+SEC-01;Utworzenie sejfu;US;Jako użytkowniczka chcę utworzyć sejf, aby zapisywać hasła lokalnie.;S1;Must;5;AC-01: sejf i losowy DEK;Bezpieczeństwo;"Ukończone po terminie S1; kod i testy działają";DEV-01
+SEC-02;Odblokowanie sejfu;US;Jako użytkowniczka chcę odblokować sejf, aby odzyskać konta.;S1;Must;5;AC-02/AC-03: dobre hasło działa, złe nie;Bezpieczeństwo;"Ukończone po terminie S1; poprawne i błędne hasło przetestowane";SEC-01
+CI-01;Automatyczny build, test i format;TASK;GitHub Actions po pushu/PR;S1;Must;3;CI po push i PR: restore, build, xUnit i dotnet format whitespace bez błędów;Jakość;"Ukończone po terminie S1; build, 25 testów i format w CI zielone";DEV-01
+DATA-01;Zapis w SQLite;TASK;Szyfrogramy wpisów w EF Core/SQLite;S2;Must;5;AC-04/AC-07: trwałość i brak jawnych haseł;Kod;"Zaimplementowane; test zapisu OK";SEC-02
+US-01;Dodanie konta;US;Jako użytkowniczka chcę dodać konto, aby nie zapamiętywać loginu i hasła.;S2;Must;3;AC-04: wpis widoczny po zapisaniu;Funkcja;"Kod i testy ukończone; pełny scenariusz ręczny nadal planowany";DATA-01
+US-02;Edycja konta;US;Jako użytkowniczka chcę zmienić dane wpisu, aby przechowywać aktualne hasło.;S2;Must;2;AC-05: zmiana pozostaje po restarcie;Funkcja;"Kod i testy ukończone; ponowna weryfikacja ręczna planowana";US-01
+US-03;Usunięcie konta;US;Jako użytkowniczka chcę usunąć niepotrzebny wpis, aby uporządkować sejf.;S2;Must;2;AC-05: inne wpisy nie są usuwane;Funkcja;"Kod i testy ukończone; ponowna weryfikacja ręczna planowana";US-01
+US-04;Lista i wyszukiwanie;US;Jako użytkowniczka chcę szybko znaleźć konto po nazwie.;S2;Must;3;AC-06: lista filtruje wpisy;Funkcja;"Kod poprawiony i działa; pełne demo ręczne nadal planowane";US-01
+US-05;Generator hasła;US;Jako użytkowniczka chcę generować losowe hasło, aby nie wymyślać go sama.;S2;Should;2;AC-09: dozwolona długość i test błędnej długości;Funkcja;"Zaimplementowane; testy OK";DEV-01
+US-06;Reset sejfu;US;Jako użytkowniczka chcę usunąć lokalny sejf po potwierdzeniu, aby zacząć od nowa.;S2;Should;2;AC-13: anuluj nie usuwa, reset usuwa tylko lokalnie;Funkcja;"Kod i test resetu ukończone; ręczny scenariusz z anulowaniem planowany";DATA-01
+PORT-01;Eksport sejfu;US;Jako użytkowniczka chcę zapisać zaszyfrowaną kopię w wybranym pliku, aby ją przenieść.;S3;Must;3;AC-10: plik .pvault w wybranej lokalizacji;Funkcja;"Kod i test automatyczny gotowe przed S3; pełny test ręczny planowany";DATA-01
+PORT-02;Import sejfu;US;Jako użytkowniczka chcę przywrócić zaszyfrowaną kopię, aby odzyskać wpisy.;S3;Must;5;AC-11/AC-12: poprawny import i brak utraty po błędzie;Funkcja;"Kod i test błędnego importu gotowe przed S3; pełny test ręczny planowany";PORT-01
+TEST-01;Testy xUnit;TASK;Testy poprawnych i błędnych scenariuszy;S3;Must;3;"25 testów uruchomionych, 0 niepowodzeń; potwierdzenie lokalnie i w CI";Jakość;"Ukończone przed S3; 25/25 xUnit, TRX i zielone CI";SEC-01,SEC-02,DATA-01
+TEST-02;Demonstracja ręczna;TASK;Przejście po podstawowych funkcjach na fikcyjnych danych;S3;Must;3;AC-01–AC-14, w tym 20 wpisów i import;Jakość;Do wykonania w S3;US-01,PORT-02,US-06
+DOC-03;Przeglądy sprintów i raport;TASK;Podsumowania, dowody, raport PDF i demo;S3;Must;3;Spójne review i końcowy PDF z prawdziwymi screenami;Dokumentacja;"W toku; raport PDF zaktualizowany 26.11, końcowe podsumowanie po S3";TEST-02
+PM-01;Kanban GitHub Projects;TASK;Połączenie Issues i backlogu z tablicą;S3;Could;2;Tablica i główne zadania z rzeczywistymi statusami;Zarządzanie;"Częściowo; Board i Roadmap istnieją, nie wszystkie 24 Issues są odwzorowane";DOC-02
+QUAL-01;Analiza SonarQube i poprawa raportowania pokrycia;TASK;Uruchamiam analizę C# i działający pomiar pokrycia kodu testami w CI;S3;Could;2;"Analiza C# i import raportu XML; SonarQube pokazuje rzeczywisty procent pokrycia";Jakość;"UKOŃCZONE przed S3; analiza C#, pokrycie 60,0% z 425 linii, 1 Maintainability";CI-01
+SEC-03;Kontrola NuGet i przegląd parametrów kryptografii;TASK;Sprawdzam zależności NuGet po aktualizacji i dokumentuję ograniczenia KDF i rotacji kluczy;S3;Should;2;"Brak wcześniejszego NU1903 po aktualizacji; zapisane parametry KDF i ryzyko braku rotacji";Bezpieczeństwo;"UKOŃCZONE przed S3; po aktualizacji pakietów NU1903 nie występuje; KDF opisane";CI-01
+OPT-01;Windows Hello;US;Jako użytkowniczka chciałabym dodatkowo autoryzować dostęp przez Windows Hello.;Poza MVP;Could;5;Ewentualny osobny prototyp po ukończeniu MVP;Rozszerzenia;"Niezrealizowane; poza MVP, niski priorytet";SEC-02
+OPT-02;Automatyczna synchronizacja z chmurą;US;Jako użytkowniczka chciałabym synchronizować sejf między własnymi urządzeniami.;Poza MVP;Could;8;Dopiero po opracowaniu konfliktów i bezpieczeństwa synchronizacji;Rozszerzenia;"Niezrealizowane; poza MVP, niski priorytet";PORT-01,PORT-02
+OPT-03;Zmiana silnika bazy danych;US;Jako użytkowniczka chciałabym w przyszłości używać innego magazynu danych, jeśli pojawi się taka potrzeba.;Poza MVP;Could;5;Migracja danych i ponowne przejście testów;Rozszerzenia;"Niezrealizowane; poza MVP, niski priorytet";DATA-01

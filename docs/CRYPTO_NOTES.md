@@ -1,24 +1,17 @@
-# Pierwszy moduł szyfrowania — notatki
+# Zabezpieczenie sejfu i informacje techniczne
 
-W ramach Sprintu 1 przygotowuję osobny moduł, który można testować bez uruchamiania WPF. To jeszcze nie jest gotowy sejf użytkownika.
+## Zastosowane elementy
 
-## Jak działa wersja 1
-1. Losuję 32-bajtowy DEK, który szyfruje dane.
-2. Z hasła master i losowej soli wyprowadzam KEK przez Argon2id (64 MiB pamięci, 3 iteracje, 1 wątek).
-3. DEK szyfruję kluczem KEK przez AES-256-GCM.
-4. Dane szyfruję oddzielnie przez AES-256-GCM za pomocą DEK.
-5. W pliku można zapisać wersję formatu, parametry KDF, sól, nonce, tagi i szyfrogram. Nie zapisuję tam jawnego DEK ani hasła master.
+Aplikacja używa hasła master do wyprowadzenia klucza KEK przez Argon2id. Dla lokalnego sejfu `VaultCrypto.cs` stosuje domyślnie 32 MiB pamięci, trzy iteracje i dwa wątki. Losowy 32-bajtowy DEK służy do szyfrowania wpisów przez AES-256-GCM. W nagłówku znajdują się sól, parametry KDF, wersja formatu i zaszyfrowany DEK; hasło master ani jawny DEK nie są tam zapisywane. Wpisy są szyfrowane osobno, z dodatkowym kontekstem AAD powiązanym z identyfikatorem rekordu.
 
-Przy odszyfrowywaniu najpierw sprawdzana jest wersja formatu i długości pól. AES-GCM odrzuca złe hasło oraz zmodyfikowane zaszyfrowane dane (w obu przypadkach weryfikacja taga się nie powiedzie).
+W projekcie istnieje również `VaultCryptoService.cs` z wcześniejszym testowym formatem pliku i oddzielnymi parametrami (64 MiB / 3 / 1). To nie jest drugi aktywny format lokalnej bazy — obie klasy są wykorzystywane w różnych testach, nie należy mieszać ich parametrów.
 
-## Ograniczenia
-- Format `v1` jest prototypem. Parametry Argon2id są na razie stałe, a wielkość danych ograniczona do 1 MiB.
-- Szyfrowanie nie jest jeszcze podłączone do okna WPF ani SQLite.
-- Hasło master jest przekazywane jako `string`, więc nie mam pełnej kontroli nad czasem jego obecności w pamięci.
-- Nie ma zarządzania zapisem atomowym, kopiami zapasowymi ani migracjami formatu — to kolejne zadania.
-- Kod nie przeszedł niezależnego audytu bezpieczeństwa. Testować tylko na fikcyjnych hasłach.
+## Sprawdzone właściwości
 
-## Testy
-Poprawny odczyt, błędne hasło, naruszenie integralności danych i klucza, różne losowe wartości, zapis/odczyt JSON, odrzucenie złego nagłówka i puste dane.
+W xUnit mam testy dobrego i błędnego hasła, niepoprawnego szyfrogramu lub tagu, operacji na bazie, eksportu, importu i resetu. Aktualny wynik całego zestawu wynosi 25/25. Import sprawdza zawartość przed zastąpieniem danych i zapisuje ją transakcyjnie, żeby nieudana próba nie usuwała obecnego sejfu.
 
-Użyte elementy: `AesGcm` z .NET oraz pakiet `Konscious.Security.Cryptography.Argon2` (1.3.1).
+## Kontrola pakietów i ograniczenia
+
+W starszym przebiegu otrzymałam ostrzeżenie `NU1903` dotyczące przechodniego `SQLitePCLRaw.lib.e_sqlite3 2.1.11`. Po aktualizacji zależności kolejne sprawdzenie nie wykazywało już wcześniejszego ostrzeżenia. Tę konkretną naprawę traktuję jako zakończoną; możliwość pojawienia się kolejnych podatności pozostaje ryzykiem do monitorowania.
+
+Nie wdrożyłam automatycznej rotacji DEK ani pełnej migracji parametrów KDF. Klucz kryptograficzny nie ma automatycznej daty ważności; problemem jest potencjalna kompromitacja sekretu i starzenie się parametrów. Program ma charakter dydaktyczny i nie przeszedł niezależnego audytu, dlatego używam do niego fikcyjnych danych.

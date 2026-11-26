@@ -1,26 +1,25 @@
-# GitHub – rzeczy do sprawdzenia przed oddaniem
+# GitHub — lista kontroli przed oddaniem
 
-## Repozytorium
-- [ ] Repozytorium jest prywatne, a prowadzący `pan-rafal` ma dostęp jako współpracownik.
-- [ ] Temat został zgłoszony / zaakceptowany.
-- [ ] Mam kod w `main`, a większe zmiany wprowadzałam przez osobne gałęzie i PR.
-- [ ] Usunęłam z bieżącego projektu stare pliki z przykładu w Pythonie.
+## Pliki i planowanie
 
-## Zadania i sprinty
-- [ ] Backlog odpowiada temu, co naprawdę robię w aplikacji.
-- [ ] Mam trzy plany sprintów i uczciwe podsumowania postępów.
-- [ ] Najważniejsze zadania mają User Stories i kryteria akceptacji.
-- [ ] Na ocenę 5: przeniosłam zadania do GitHub Projects (Kanban: Todo / In Progress / Done).
+- [x] Kod C#/.NET 10 i dokumenty projektu są w repozytorium.
+- [x] Plany Sprintów 1 i 2 są zachowane, a wyniki umieszczone osobno w `docs/SPRINT1_REVIEW.md` i `docs/SPRINT2_REVIEW.md`.
+- [x] Przygotowałam plan Sprintu 3, Project Charter, backlog, User Stories, kryteria akceptacji i rejestr ryzyk.
+- [ ] Powiążę główne pozycje backlogu z GitHub Issues na istniejącej tablicy Projects.
+- [ ] Zweryfikuję dostęp prowadzącego oraz wymagany sposób udostępnienia repozytorium; wcześniejszy fork był publiczny.
 
-## Kontrole jakości
-- [ ] W Visual Studio widzę testy w `PasswordVault.Tests`.
-- [ ] Uruchomiłam testy i zapisałam wynik (po poprawce resetowania ma być 13 testów).
-- [ ] GitHub Actions: build, testy oraz lint przechodzą na zielono.
-- [ ] Na ocenę 5: podłączyłam SonarQube i mam prawdziwy wynik analizy.
+## CI, testy, SonarQube
 
-## Raport i demo
-- [ ] Raport PDF zawiera opis projektu, backlog, ryzyka, sprinty i wnioski.
-- [ ] Dodałam screeny z aplikacji, Visual Studio i GitHub Actions.
-- [ ] Mam link do repozytorium i krótkie demo na fikcyjnych danych.
+- [x] Testy xUnit: **25/25**.
+- [x] Zielone GitHub Actions: build, testy, format.
+- [x] SonarQube: analiza C# i pomiar pokrycia — **60,0% z 425 linii**.
+- [x] Po aktualizacji NuGet wcześniejsze ostrzeżenie `NU1903` nie występuje.
+- [ ] Sprawdzę / opiszę jeden pozostały problem Maintainability oraz jednoznaczny status Quality Gate.
+- [ ] Zachowam screenshoty bieżących wyników i linki do właściwych przebiegów.
 
-Nic z powyższych punktów nie jest automatycznie wykonane przez skopiowanie dokumentacji. Zaznaczam tylko te punkty, które rzeczywiście sprawdziłam.
+## Weryfikacja ręczna i dokumentacja
+
+- [ ] Wykonam pełny scenariusz ręczny, szczególnie 20 fikcyjnych wpisów, eksport/import/reset i zachowanie po błędzie.
+- [ ] Po zakończeniu Sprintu 2 uzupełnię jego końcowy przegląd, jeśli zajdą dalsze zmiany.
+- [ ] Po 13 grudnia uzupełnię przegląd Sprintu 3 o faktyczne wyniki.
+- [ ] Sprawdzę zgodność wersji raportu PDF z najnowszym stanem prac.

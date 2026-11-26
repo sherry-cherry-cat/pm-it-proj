@@ -1,13 +1,13 @@
-# SonarQube / SonarCloud — jeśli wystarczy czasu
+# SonarQube Cloud — aktualna konfiguracja i wynik
 
-Prowadzący wymienia SonarQube jako element na ocenę 5. Nie wpisywałam fikcyjnego wyniku i nie dodawałam nieskonfigurowanego workflow, który automatycznie zepsułby CI.
+Ten dokument zastępuje wcześniejsze instrukcje opisujące niedziałający pomiar. Na 26 listopada analiza kodu C# i przekazywanie pokrycia do SonarQube działają.
 
-Jeśli chcę spróbować:
+- Osobny workflow GitHub Actions: `.github/workflows/build.yml` (nie nadpisuję go paczką dokumentacyjną).
+- Uwierzytelnianie: sekret `SONAR_TOKEN` w GitHub Actions. Nie umieszczam tokenu w repozytorium.
+- Testy: 25/25 w .NET 10.
+- Pokrycie: zbierane przez narzędzie Microsoft `dotnet-coverage`, raport XML przekazywany do SonarQube.
+- Widok `Overall Code`: **60,0% z 425 linii objętych pomiarem**; duplikacje **0,0%**; Security **A**, Reliability **A**, Maintainability **A** z **jednym** otwartym problemem.
 
-1. Zakładam projekt na SonarQube Cloud albo używam serwera uczelni.
-2. Sprawdzam dostępność analizy prywatnego repozytorium i limit planu.
-3. Generuję token i dodaję go do repozytorium przez `Settings → Secrets and variables → Actions` jako `SONAR_TOKEN`.
-4. Korzystam z instrukcji **SonarScanner for .NET** i wpisuję prawdziwy klucz projektu i adres serwera.
-5. W raporcie zamieszczam tylko faktycznie uzyskany wynik analizy.
+Samo zielone uruchomienie workflow i ocena A nie oznaczają automatycznie, że osobny **Quality Gate** jest zaliczony. Jego rzeczywisty wynik należy sprawdzić oddzielnie w panelu SonarQube.
 
-Źródło: https://docs.sonarsource.com/sonarqube-cloud/advanced-setup/ci-based-analysis/sonarscanner-for-dotnet/introduction/
+Wcześniejsze 0% było problemem importu danych pokrycia, a nie wynikiem 25 niezaliczonych testów. Początkowy kolektor `XPlat Code Coverage` nie był rozpoznawany przez runner. Po zmianie na `dotnet-coverage` procent zaczął się poprawnie wyświetlać.

@@ -1,11 +1,13 @@
-﻿ID;Ryzyko;Prawdopodobieństwo;Wpływ;Reakcja;Odpowiedzialna;Status
-R01;Opóźnienie prac;Wysokie;Wysoki;Ograniczam MVP, nie robię chmury i Windows Hello;Autorka;Otwarte
-R02;Błąd w szyfrowaniu;Średnie;Wysoki;Używam znanych bibliotek i testów negatywnych;Autorka;Otwarte
-R03;Utrata pliku bazy;Średnie;Wysoki;Robię zaszyfrowane kopie i testuję import;Autorka;Otwarte
-R04;Zmiana wersji bibliotek/NuGet;Średnie;Średni;Przypinam wersje pakietów i sprawdzam restore;Autorka;Otwarte
-R05;Czerwone GitHub Actions;Średnie;Średni;Uruchamiam build/test lokalnie przed PR;Autorka;Otwarte
-R06;Błędy GUI WPF;Średnie;Średni;Zostawiam prosty widok bez dodatkowych kontrolek;Autorka;Otwarte
-R07;Uszkodzony import;Średnie;Wysoki;Sprawdzam hasło i wszystkie wpisy przed zmianą bazy;Autorka;Otwarte
-R08;Za dużo funkcji w backlogu;Wysokie;Średni;Funkcje dodatkowe przenoszę poza MVP;Autorka;Otwarte
-R09;Brak dowodów do raportu;Średnie;Średni;Zapisuję screeny z VS/Actions oraz linki do PR;Autorka;Otwarte
-R10;Przypadkowy reset lokalnego sejfu;Średnie;Wysoki;Pytanie przed resetem i eksport kopii przed testami;Autorka;Otwarte
+﻿ID;Ryzyko;Prawdopodobieństwo;Wpływ;Reakcja;Odpowiedzialna;Stan na 26.11.2026;Jak monitoruję
+R01;Za mało czasu / niedokończenie MVP;Wysokie;Wysoki;"Ograniczam zakres do podstawowych funkcji; odkładam dodatki.";Autorka;"Wystąpiło opóźnienie S1; nadal monitoruję";Przegląd sprintów i liczba niedokończonych zadań
+R02;Błąd szyfrowania albo odblokowanie po złym haśle;Średnie;Wysoki;Korzystam z gotowych prymitywów, testuję złe hasło i zmieniony tag.;Autorka;"Monitorowane; testy negatywne przechodzą";xUnit, ręczny test błędnego hasła
+R03;Utrata danych przy imporcie lub resecie;Średnie;Wysoki;Potwierdzenie resetu, test nieudanego importu, kopia przed demo.;Autorka;"Monitorowane; test jednostkowy OK";Test importu, resetu i przywrócenia kopii
+R04;Podatność w zależności NuGet / SQLite;Wysokie;Wysoki;Zaktualizowałam zależności po NU1903, sprawdziłam kolejne logi i pozostawiłam kontrolę pakietów w CI.;Autorka;"Wcześniejsze NU1903 usunięte aktualizacją; ryzyko nowych podatności monitoruję";dotnet list package --vulnerable --include-transitive
+R05;Kompromitacja hasła master / klucza;Średnie;Wysoki;"Hasło master nie jest zapisywane; DEK losowy i zaszyfrowany. Używam testowych danych.";Autorka;Ryzyko potencjalne;Przegląd kodu i sposób przechowywania danych
+R06;Starzenie się parametrów KDF i brak rotacji klucza;Średnie;Wysoki;"Dokumentuję format i parametry; migrację/rotację zostawiam do przyszłej wersji.";Autorka;Ograniczenie znane, nierozwiązane w MVP;Przegląd VaultCrypto i dokumentacji
+R07;Błąd CI lub brak analizy C# w SonarQube;Wysokie;Średni;"Sprawdzam logi; nie traktuję zielonego buildu jako gwarancji jakości.";Autorka;"Wystąpiły błędy konfiguracji; aktualnie CI i analiza C# działają";GitHub Actions i dashboard SonarQube
+R08;Słabe lub zerowe pokrycie raportowane w SonarQube;Średnie;Średni;"Zastąpiłam nieskuteczny kolektor XPlat narzędziem dotnet-coverage; sprawdziłam import raportu XML.";Autorka;"Problem raportowania rozwiązany; SonarQube pokazuje 60,0% z 425 linii";Dashboard SonarQube, log scanner
+R09;Zbyt szeroki zakres / dodatkowe API;Wysokie;Średni;Windows Hello, chmurę i zmianę bazy oznaczam jako Could poza MVP.;Autorka;Ograniczono zakres;Backlog i Sprint 3
+R10;Niespójność dokumentacji z faktycznymi pracami;Wysokie;Średni;Zachowuję plany, osobno piszę review i aktualizuję statusy.;Autorka;"Dokumentację aktualizuję do stanu 26.11; plany S1/S2 zachowane";Porównanie backlogu, kodu, CI i review
+R11;Brak dowodów do raportu;Średnie;Średni;Zachowuję screeny z Visual Studio, CI, Sonara i Kanbana.;Autorka;Monitorowane;Lista plików i linków do raportu
+R12;Przechowanie prawdziwych sekretów w repozytorium;Niskie;Wysoki;Używam fikcyjnych danych i sprawdzam .gitignore oraz Git Changes.;Autorka;Ryzyko potencjalne;Przegląd zmian przed commitem

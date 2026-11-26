@@ -1,37 +1,41 @@
-# Project Charter — PasswordVault
+# Project Charter – PasswordVault
 
-**Temat:** desktopowy menedżer haseł dla Windows  
+**Przedmiot:** Zarządzanie projektami IT  
+**Grupa:** 2  
 **Realizacja:** indywidualna  
-**Termin projektu (przyjęty w planie):** 15.12.2026
+**Termin roboczy oddania:** 15.12.2026
 
-## Cel
+## Cel projektu (SMART)
 
-Przygotuję prosty program, który pozwala utworzyć lokalny sejf, odblokować go hasłem master, zapisać co najmniej 20 przykładowych kont i przenieść ich zaszyfrowaną kopię do pliku. Do końca projektu chcę mieć też testy automatyczne, trzy podsumowania sprintów i działający workflow GitHub Actions.
+Chcę przygotować do 15 grudnia 2026 r. prostą aplikację desktopową do przechowywania haseł na Windows. Użytkowniczka ma móc utworzyć sejf zabezpieczony hasłem master, dodawać i zmieniać wpisy oraz odzyskać je z zaszyfrowanego eksportu. Sprawdzę działanie aplikacji na fikcyjnych danych, uruchomię testy jednostkowe i kontrole kodu na GitHubie. Przebieg prac podzieliłam na trzy sprinty.
+
+Za mierzalny wynik przyjmuję możliwość zapisania i ponownego odczytania **20 przykładowych wpisów**, odrzucanie błędnego hasła, poprawny eksport/import oraz zielone testy i kompilację w GitHub Actions. Test 20 wpisów wymaga jeszcze ręcznego potwierdzenia w demonstracji; nie zastępuję go samym wynikiem testów jednostkowych.
 
 ## Zakres
 
-**W projekcie:** WPF, C#/.NET 10, SQLite, dodawanie/edycja/usuwanie kont, losowy generator hasła, szyfrowanie Argon2id i AES-GCM, eksport/import pliku, testy i dokumentacja.
+**W zakresie (MVP):** aplikacja Windows w C#/.NET 10 i WPF, lokalny SQLite (EF Core), tworzenie i odblokowanie sejfu, dodawanie, edycja, usuwanie i wyszukiwanie kont, generator haseł, reset z potwierdzeniem, eksport/import zaszyfrowanego pliku, testy xUnit i CI.
 
-**Poza projektem:** automatyczna synchronizacja z chmurą, współdzielenie sejfu między użytkownikami, aplikacja mobilna i Windows Hello. Te funkcje mogłyby być rozbudową, ale nie są potrzebne do pokazania podstawowej wersji.
+**Poza MVP:** logowanie dodatkowo przez Windows Hello, automatyczna synchronizacja z chmurą, zmiana silnika SQLite na inny, aplikacja mobilna i udostępnianie sejfu innym użytkownikom. Zostawiłam te pomysły w backlogu z niskim priorytetem, bez deklarowania ich realizacji.
 
-## Interesariusze
+## Interesariusze i odpowiedzialność
 
-- **Autorka:** planuję sprinty, piszę kod, testuję i prowadzę repozytorium.
-- **Użytkowniczka testowa:** chcę móc zapisać i odzyskać własne wpisy z sejfu.
-- **Prowadzący:** sprawdza dokumentację, przebieg prac i efekt demonstracji.
+- **Autorka projektu:** planowanie, programowanie, testy, GitHub i dokumentacja. Pracuję samodzielnie.
+- **Użytkowniczka testowa:** korzysta z lokalnego sejfu i sprawdza, czy można zapisać oraz odzyskać dane.
+- **Prowadzący:** ocenia spójność planu, realizacji, testów, kontroli jakości i raportu.
 
-## Kryteria sukcesu
+## Kryteria zakończenia
 
-- Aplikacja uruchamia się na Windows 11.
-- Da się zapisać 20 testowych wpisów, zamknąć program i odczytać wpisy po odblokowaniu.
-- Błędne hasło nie odblokowuje sejfu.
-- Eksportowany plik da się zaimportować do pustego sejfu i odblokować hasłem master.
-- Testy i kompilacja przechodzą w GitHub Actions, a dokumentacja pokazuje trzy sprinty.
+- Program można uruchomić i obsłużyć na Windows.
+- Dodany wpis zostaje zachowany po ponownym uruchomieniu aplikacji.
+- Złe hasło lub uszkodzone dane nie pozwalają odczytać zawartości.
+- Eksport jest zaszyfrowany i można go ponownie zaimportować na danych testowych.
+- Repozytorium zawiera backlog, wymagania, rejestr ryzyk, trzy plany sprintów oraz ich przeglądy.
+- GitHub Actions uruchamia kompilację, testy i kontrolę formatowania. Dodatkowo pokazuję analizę SonarQube i tablicę GitHub Projects.
 
 ## Założenia i ograniczenia
 
-Pracuję sama, korzystam z Visual Studio 2026 i GitHuba. Na projekt mam ograniczony czas, dlatego ważniejsze jest działające MVP niż dodatkowe funkcje. Program przeznaczony jest do demonstracji na danych testowych, bez audytu bezpieczeństwa.
+Pracuję samodzielnie, w Visual Studio 2026, przy ograniczonym czasie. Dlatego najpierw kończę podstawową wersję programu, a dopiero potem dodatki. Aplikacja ma charakter edukacyjny i **nie przeszła audytu bezpieczeństwa**; do demonstracji używam wyłącznie wymyślonych danych logowania.
 
-## Główne ryzyka
+## Najważniejsze ryzyka
 
-Największe zagrożenia to obsunięcie terminów, błędy w szyfrowaniu, kłopoty z NuGet i GitHub Actions oraz utrata danych podczas importu. Opisałam je w `RISK_REGISTER.csv` i staram się ograniczać testami oraz kopiami zapasowymi.
+Opóźnienie terminów, błędy kryptograficzne, utrata danych przy imporcie/resetowaniu, podatności pakietów NuGet, starzenie się parametrów zabezpieczeń i niespójność dokumentacji z kodem. Szczegóły oraz działania ograniczające ryzyko są w `RISK_REGISTER.csv`.

@@ -1,20 +1,47 @@
-# Sprint 1 – co wyszło, a co nie
+# Sprint 1 — przegląd realizacji i retrospektywa
 
-**Plan:** 1–15.11.2026  
-**Notatka uzupełniona:** 25.11.2026 (na podstawie dotychczasowej pracy)
+**Okres planowany:** 1–15 listopada 2026 r.  
+**Data opracowania przeglądu:** 26 listopada 2026 r.  
+**Plan źródłowy:** [`SPRINT1_PLAN.md`](../SPRINT1_PLAN.md) (nie zmieniam jego wcześniejszych założeń).
 
-## Co zrobiłam
-- Założyłam projekt WPF w Visual Studio i wrzuciłam go na GitHuba.
-- Uruchomiłam pierwsze okno z przyciskiem testowym.
-- Przygotowałam plan pierwszego sprintu i zaczęłam dokumentację.
+## 1. Cel i punkt wyjścia
 
-## Czego nie udało mi się zamknąć w terminie
-Przeszacowałam liczbę zadań. Nie miałam wtedy potwierdzonych testów kryptografii i działającego pipeline'u, więc te elementy zostawiłam do wykonania później. Nie zaznaczam ich jako ukończonych w dniu 15 listopada.
+Chciałam przygotować działającą podstawę projektu PasswordVault: uruchamiany program WPF, uporządkowane repozytorium i pierwsze elementy obsługi sejfu. Jednocześnie zaplanowałam Project Charter, ryzyka, backlog i początek automatycznej kontroli kodu. Zadania z planu miały różny charakter: dokumentacyjne (DOC-01, DOC-02), aplikacyjne (DEV-01, SEC-01, SEC-02) i związane z jakością (CI-01).
 
-## Dowody / do wpisania
-- Commit z pierwszym projektem WPF: [link]
-- Commit z planem sprintu: [link]
-- Testy wykonane do 15.11: [wpiszę, jeśli mam wynik]
+Nie zakładałam tworzenia trzech niezależnych prototypów. Kolejne sprinty rozwijają to samo rozwiązanie. Po pierwszym sprincie miałam uruchamialny szkielet, na którym mogłam sprawdzać następne zmiany.
 
-## Wniosek
-Przy kolejnych sprintach chcę planować mniej rzeczy na raz. Najpierw sprawdzę działającą wersję programu, potem dołożę kolejne funkcje.
+## 2. Faktyczny przyrost na koniec Sprintu 1
+
+- Utworzyłam rozwiązanie w Visual Studio i przygotowałam początkowy interfejs WPF. Program można było skompilować i uruchomić.
+- Dodałam pierwsze materiały projektowe oraz pracowałam z repozytorium GitHub i historią commitów.
+- Uruchomiłam proste okno z elementem testowym. Był to punkt wyjścia do podłączenia logiki sejfu, a nie gotowy menedżer haseł.
+- Rozpoczęłam przygotowanie modułu kryptograficznego i organizacji testów, lecz nie miałam na 15 listopada potwierdzenia spełnienia wszystkich kryteriów.
+
+## 3. Porównanie planu z realizacją
+
+| ID | Założenie planu | Rezultat do 15.11 | Dalszy los |
+|---|---|---|---|
+| DOC-01 | Karta projektu i lista ryzyk | Opracowałam pierwsze materiały | Później uzupełniłam ryzyka o problem NuGet i kontrolę jakości |
+| DOC-02 | Backlog i historie użytkowniczki | Rozpoczęłam prowadzenie backlogu | Rozwinęłam kryteria akceptacji i zależności w kolejnej iteracji |
+| DEV-01 | Uruchamialny szkielet WPF | Zrealizowałam podstawowy widok i kompilację | Kontynuowałam pracę nad tym samym projektem |
+| SEC-01 | Tworzenie sejfu | Niepotwierdzone jako ukończone | Dokończone po terminie, w trakcie Sprintu 2 |
+| SEC-02 | Odblokowanie sejfu | Niepotwierdzone jako ukończone | Dokończone po terminie, w trakcie Sprintu 2 |
+| CI-01 | GitHub Actions | Brak potwierdzonego zielonego przebiegu | Poprawione i uruchomione podczas Sprintu 2 |
+
+Późniejszych wyników kryptografii i CI nie dopisuję do wyniku pierwszego sprintu. W `BACKLOG.csv` pierwotny sprint tych zadań nadal ma wartość `S1`, a status opisuje ukończenie po terminie.
+
+## 4. Problemy i reakcja
+
+Więcej pracy niż planowałam wymagały połączenie interfejsu z szyfrowaniem oraz przygotowanie automatycznej weryfikacji. Część czasu poświęciłam na organizację rozwiązania, zależności projektów i poprawienie podstawowych mechanizmów. Zamiast rozszerzać zakres o funkcje chmurowe, skupiłam się na działającej wersji lokalnej.
+
+Nie zamykałam zadań wyłącznie na podstawie tego, że kod już istniał. Dla sejfu istotne było późniejsze sprawdzenie odblokowania poprawnym hasłem, odrzucania błędnego hasła i zachowania zapisanych danych.
+
+## 5. Przeniesione elementy i retrospektywa
+
+Do dalszej pracy przeszły SEC-01, SEC-02 i CI-01 oraz szczegółowe testy kryptografii. W Sprincie 2 rozbudowałam przyrost z pierwszego sprintu: od uruchamialnego okna do aplikacji zapisującej i odczytującej zaszyfrowane wpisy.
+
+Z pierwszego sprintu wyniosłam konkretną korektę sposobu pracy: ograniczyłam liczbę rozpoczętych jednocześnie zadań i uzależniłam ich zamykanie od testów, nie od samej implementacji. Osobno zapisywałam opóźnienia i zmiany zakresu, aby w dokumentacji nie poprawiać po fakcie pierwotnego planu.
+
+## 6. Dowody
+
+Podstawą są pierwsze commity w repozytorium, zapisany plan Sprintu 1 i uruchamialna początkowa wersja WPF. Nie wskazuję niezweryfikowanych numerów commitów ani historycznych wyników testów. Wyniki 25/25 oraz 60% pokrycia pochodzą z późniejszej iteracji i opisuję je w przeglądzie Sprintu 2.
